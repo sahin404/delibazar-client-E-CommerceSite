@@ -5,9 +5,9 @@ import { Link } from "react-router-dom"
 
 const Navbar = () => {
   return (
-    <div className="bg-[#A31D1D] flex items-center justify-center py-3">
+    <div className=" flex items-center py-3 justify-center gap-10">
       {/* Left */}
-      <div>
+      <div className="">
         <Link to="/">
           <img src="logo-1.png" className="h-16" />
         </Link>
@@ -16,7 +16,7 @@ const Navbar = () => {
 
       {/* Middle */}
       <div className="flex items-center border-none">
-        <input type="text" placeholder="প্রোডাক্ট সার্চ করুন" className="input rounded-r-none rounded-l-xl h-11 w-80 text-sm focus:none" />
+        <input type="text" placeholder="প্রোডাক্ট সার্চ করুন" className="input rounded-r-none rounded-l-xl h-11 w-[600px] text-sm focus:none" />
         <button className="bg-[#FFD814] h-11 p-2 rounded-r-xl">
           <IoSearchOutline className="text-3xl " />
         </button>
