@@ -1,6 +1,6 @@
 import { FaRegUser } from "react-icons/fa"
 import { FiShoppingCart } from "react-icons/fi"
-import {IoSearchOutline } from "react-icons/io5"
+import { IoSearchOutline } from "react-icons/io5"
 import { Link } from "react-router-dom"
 
 const Navbar = () => {
@@ -16,11 +16,21 @@ const Navbar = () => {
 
       {/* Middle */}
       <div className="flex items-center border-none">
-        <input type="text" placeholder="প্রোডাক্ট সার্চ করুন" className="font-bangla input bg-[#F3F4F7] rounded-r-none rounded-l-lg h-12 w-[600px] text-sm focus:none" />
-        <button className="bg-[#233A95] text-white flex items-center text-black h-12 p-3 rounded-r-lg">
-          <IoSearchOutline className="text-3xl " />
+        <input
+          type="text"
+          placeholder="প্রোডাক্ট সার্চ করুন"
+          className="font-bangla input bg-[#F3F4F7] rounded-l-lg h-12 w-[600px] text-sm border-none outline-none px-3 rounded-r-none"
+        />
+        <button className="bg-[#233A95] text-white flex items-center h-12 p-3 rounded-r-lg border-none outline-none">
+          <IoSearchOutline className="text-3xl" />
         </button>
       </div>
+
+
+
+
+
+
       {/* Right Side */}
       <div className="flex gap-3 items-center gap-3">
         <div>
@@ -33,7 +43,7 @@ const Navbar = () => {
           <h1 className="text-sm">৳</h1>
           <h1>০০.০০</h1>
         </div>
-        
+
         <div className="flex items-center gap-2 text-white bg-[#233A95] p-3 rounded-lg text-sm hover:scale-105 duration-300">
           <FaRegUser className="text-md" />
           <button className="">লগইন / নিবন্ধন</button>
