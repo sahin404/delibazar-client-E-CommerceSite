@@ -6,11 +6,17 @@ import Header2 from "../components/nonShared/Header2"
 const Main = () => {
   return (
     <div>
-      <div className="font-bangla">
+      <div className="font-bangla bg-[#F3F4F7]">
         <Header></Header>
-        <Header2></Header2>
+        <div className="bg-white">
+          <Header2></Header2>
+        </div>
+        <div className=" bg-white">
+          <div className="max-w-6xl mx-auto">
+            <Navbar></Navbar>
+          </div>
+        </div>
         <div className="max-w-6xl mx-auto">
-          <Navbar></Navbar>
           <Outlet></Outlet>
         </div>
 

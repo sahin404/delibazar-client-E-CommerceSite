@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 const Header2 = () => {
     return (
-        <div className="h-8 border-b-black text-black/50 text-[12px] flex items-center justify-evenly border-b border-b-black/20">
+        <div className="h-9 border-b-black text-black/50 text-[12px] flex items-center justify-evenly border-b border-b-black/20">
             <div className="flex gap-2">
                 <Link to="#" className="hover:text-red-500"><h1>আমাদের সম্পর্কে</h1></Link>
                 <Link to="#" className="hover:text-red-500"><h1>পছন্দের তালিকা</h1></Link>
