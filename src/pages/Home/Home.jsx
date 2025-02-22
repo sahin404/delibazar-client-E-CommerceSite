@@ -1,8 +1,9 @@
+import HomeBody from "../HomeBody/HomeBody"
 
 const Home = () => {
     return (
-        <div>
-            This is Home
+        <div className="bg-white">
+            <HomeBody />
         </div>
     )
 }
