@@ -5,7 +5,11 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        bangla: ["Hind Siliguri", "sans-serif"],
+      },
+    },
   },
   plugins: [
     // eslint-disable-next-line
