@@ -1,13 +1,15 @@
-import { Outlet } from "react-router-dom"
+import { Outlet, useLocation } from "react-router-dom"
 import Navbar from "../components/shared/Navbar"
 import Header from "../components/nonShared/Header"
 import Header2 from "../components/nonShared/Header2"
 import Header3 from "../components/nonShared/Header3"
 
-const Main = () => {
+const Main = () => { 
+  const location = useLocation();
+  
   return (
     <div>
-      <div className="font-bangla bg-[#F3F4F7]">
+      <div className={`font-bangla ${location.pathname === '/' ? 'bg-white' : 'bg-[#F3F4F7]'}`}>
         <Header></Header>
         <div className="bg-white">
           <Header2></Header2>
