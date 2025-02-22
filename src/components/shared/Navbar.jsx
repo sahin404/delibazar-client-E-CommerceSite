@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const Navbar = () => {
   return (
-    <div className=" flex items-center justify-between gap-5 border-b">
+    <div className=" flex items-center justify-between gap-5">
       {/* Left */}
       <div className="">
         <Link to="/">
