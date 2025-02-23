@@ -1,9 +1,10 @@
 import HomeBody from "../HomeBody/HomeBody"
 
+
 const Home = () => {
     return (
         <div className="bg-white">
-            <HomeBody />
+            <HomeBody></HomeBody>
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import { FaBaby} from 'react-icons/fa';
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
-import banner from '../../assets/banner/v1.png'
+import banner from '../../../assets/banner/v1.png'
 const LeftHomeBody = () => {
   return (
     <div>
