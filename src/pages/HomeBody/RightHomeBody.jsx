@@ -1,6 +1,8 @@
 const RightHomeBody = () => {
   return (
-    <div>RightHomeBody</div>
+    <div>
+      
+    </div>
   )
 }
 
