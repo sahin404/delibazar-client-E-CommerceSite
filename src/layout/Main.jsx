@@ -3,6 +3,7 @@ import Navbar from "../components/shared/Navbar"
 import Header from "../components/nonShared/Header"
 import Header2 from "../components/nonShared/Header2"
 import Header3 from "../components/nonShared/Header3"
+import Footer from "../components/shared/Footer"
 
 const Main = () => { 
   const location = useLocation();
@@ -23,10 +24,10 @@ const Main = () => {
 
           </div>
         </div>
-        <div className="max-w-6xl mx-auto">
+        <div className="">
           <Outlet></Outlet>
         </div>
-
+        <Footer></Footer>
       </div>
     </div>
 

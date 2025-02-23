@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom"
 import { FaBaby} from 'react-icons/fa';
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
+import banner from '../../assets/banner/v1.png'
 const LeftHomeBody = () => {
   return (
     <div>
@@ -17,6 +18,10 @@ const LeftHomeBody = () => {
         <li><Link to="#"><div className="flex gap-2">👩‍🍳 রান্নার উপকরণ</div></Link></li>
         <li><Link to="#"><div className="flex gap-2">🧹 পরিষ্কার পরিচ্ছন্নতা</div></Link></li>
       </ul>
+
+      <div className="p-5">
+        <img src={banner} alt="" />
+      </div>
 
     </div>
   )
