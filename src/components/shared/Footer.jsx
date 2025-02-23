@@ -31,7 +31,7 @@ const Footer = () => {
             {/* right side */}
             <div className="flex justify-between gap-10 flex-1">
               <div>
-                <p className="font-medium text-gray-900 dark:text-white">সেবা</p>
+                <p className="font-medium text-gray-900 dark:text-white ">সেবা</p>
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
                     <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
