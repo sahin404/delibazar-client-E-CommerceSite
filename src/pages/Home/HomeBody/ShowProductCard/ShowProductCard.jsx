@@ -1,5 +1,9 @@
+import { Link } from "react-router-dom";
+
 const ShowProductCard = ({product}) => {
-   const {name, picture, price, stock_status, id} = product;
+   const {name, picture, price, stock_status, _id} = product;
+
+
   return (
     <div className="space-y-2 rounded-xl bg-white p-3 shadow-lg border-2">
     <div className="relative flex h-48 w-full justify-center lg:h-[260px]">
@@ -11,7 +15,7 @@ const ShowProductCard = ({product}) => {
         <p>দাম: {price}৳</p>
     </div>
     <div className="flex items-center justify-center gap-3 flex-wrap">
-        <button className="rounded-lg bg-[#233A95] px-4 py-2 font-semibold text-white duration-300 hover:scale-105 ">বিস্তারিত</button>
+        <Link to={`/product/${_id}`}><button className="rounded-lg bg-[#233A95] px-4 py-2 text-white duration-300 hover:scale-105 ">বিস্তারিত</button></Link>
         <button className="rounded-lg bg-[#EF4444] px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:">ব্যাগে যোগ করুন</button>
     </div>
 </div>
