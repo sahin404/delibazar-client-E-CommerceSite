@@ -1,32 +1,48 @@
-import { FaBaby } from 'react-icons/fa';
+import { useState } from "react";
+import { FaBaby } from "react-icons/fa";
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
-import banner from '../../../assets/banner/v1.png'
-const LeftHomeBody = ({setCategory}) => {
+import banner from "../../../assets/banner/v1.png";
+
+const LeftHomeBody = ({ setCategory }) => {
+  const [activeCategory, setActiveCategory] = useState("popular");
+
   const handleButton = (name) => {
     setCategory(name);
-  }
-  return (
-    <div>
-      <ul className="space-y-4 pl-10 pt-2">
-        <li><button className="flex gap-2" onClick={() => handleButton('popular')}>🎩 জনপ্রিয়</button></li>
+    setActiveCategory(name);
+  };
 
-        <li><button className="flex gap-2" onClick={() => handleButton('grocery')}><MdOutlineLocalGroceryStore /> মুদিখানা</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('snacks')}>🍪 স্ন্যাকস</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('cosmetics')}>🏼 কসমেটিক্স</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('beverages')}>🍷 বেভারেজ</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('dairy_products')}>🐄 ডেয়ারি প্রোডাক্টস</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('bakery_items')}>🎂 বেকারি আইটেম</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('health_safety')}><FaBaby /> স্বাস্থ্য ও সুরক্ষা</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('baby_care')}>🚼 বেবি কেয়ার</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('cooking_ingredients')}>👩‍🍳 রান্নার উপকরণ</button></li>
-        <li><button className="flex gap-2" onClick={() => handleButton('cleaning_hygiene')}>🧹 পরিষ্কার পরিচ্ছন্নতা</button></li>
+  return (
+    <div className="w-64"> {/* Set a fixed width for uniformity */}
+      <ul className="space-y-2 pl-4 pt-2">
+        {[
+          { name: "popular", label: "🎩 জনপ্রিয়" },
+          { name: "grocery", label: <><MdOutlineLocalGroceryStore /> মুদিখানা</> },
+          { name: "snacks", label: "🍪 স্ন্যাকস" },
+          { name: "cosmetics", label: "💄 কসমেটিক্স" },
+          { name: "beverages", label: "🍷 বেভারেজ" },
+          { name: "dairy_products", label: "🐄 ডেয়ারি প্রোডাক্টস" },
+          { name: "bakery_items", label: "🎂 বেকারি আইটেম" },
+          { name: "health_safety", label: <><FaBaby /> স্বাস্থ্য ও সুরক্ষা</> },
+          { name: "baby_care", label: "🚼 বেবি কেয়ার" },
+          { name: "cooking_ingredients", label: "👩‍🍳 রান্নার উপকরণ" },
+          { name: "cleaning_hygiene", label: "🧹 পরিষ্কার পরিচ্ছন্নতা" },
+        ].map((item) => (
+          <li key={item.name}>
+            <button
+              className={`flex items-center gap-2 w-full px-4 py-2 rounded-md transition-all duration-200 
+              ${activeCategory === item.name ? "bg-red-500 text-white" : "bg-gray-200 text-gray-700"}`}
+              onClick={() => handleButton(item.name)}
+            >
+              {item.label}
+            </button>
+          </li>
+        ))}
       </ul>
       <div className="p-5">
-        <img src={banner} alt="" />
+        <img src={banner} alt="Banner" className="w-full" />
       </div>
-      
     </div>
-  )
-}
+  );
+};
 
-export default LeftHomeBody
+export default LeftHomeBody;
