@@ -1,9 +1,9 @@
 import { FaBaby } from 'react-icons/fa';
 import { MdOutlineLocalGroceryStore } from "react-icons/md";
 import banner from '../../../assets/banner/v1.png'
-const LeftHomeBody = () => {
+const LeftHomeBody = ({setCategory}) => {
   const handleButton = (name) => {
-    console.log(name);
+    setCategory(name);
   }
   return (
     <div>
@@ -24,7 +24,7 @@ const LeftHomeBody = () => {
       <div className="p-5">
         <img src={banner} alt="" />
       </div>
-
+      
     </div>
   )
 }

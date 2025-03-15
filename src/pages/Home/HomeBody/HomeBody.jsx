@@ -3,14 +3,13 @@ import LeftHomeBody from "./LeftHomeBody"
 import RightHomeBody from "./RightHomeBody"
 
 const HomeBody = () => {
-    const [selected, setSelected] = useState("নতুন");
+    const [selected, setSelected] = useState("ডিফল্ট");
+    const [category, setCategory] = useState("");
 
     const options = [
       "ডিফল্ট",
-      "সর্বোচ্চ বিক্রয়",
       "মূল্য উচ্চমুখী",
       "মূল্য নিম্নমুখী",
-      "নতুন",
     ];
     return (
         <div className="max-w-6xl  mx-auto">
@@ -20,7 +19,7 @@ const HomeBody = () => {
                     <div className="bg-[#F3F4F7] flex justify-center items-center h-10 py-8 border mb-2">
                         প্রোডাক্ট ক্যাটাগরি
                     </div>
-                    <LeftHomeBody></LeftHomeBody>
+                    <LeftHomeBody setCategory={setCategory}></LeftHomeBody>
                 </div>
                 {/* Right Side */}
                 <div className="border col-span-3 border-t-0 border-l-0">
@@ -39,7 +38,7 @@ const HomeBody = () => {
                             ))}
                         </div>
                     </div>
-                    <RightHomeBody></RightHomeBody>
+                    <RightHomeBody category={category}></RightHomeBody>
                 </div>
             </div>
 
