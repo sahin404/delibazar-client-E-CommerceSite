@@ -1,12 +1,32 @@
+import { useEffect, useState } from "react"
 import Banner from "../Banner/Banner"
+import useAxiosPublic from "../../../hooks/useAxiosPublic/useAxiosPublic"
+import ShowProductCard from "./ShowProductCard/ShowProductCard";
 
 const RightHomeBody = ({ category }) => {
-  // console.log(category_name);
+  const [products, setProducts] = useState([]);
+  const axiosPublic = useAxiosPublic();
+  if(category===""){
+    category='popular';
+  }
+  useEffect(()=>{
+    const fetchData = async()=>{
+      const response = await axiosPublic.get(`/products/${category}`)
+      setProducts(response.data);
+    }
+    fetchData();
+  },[axiosPublic,category])
   return (
     <div>
-      <Banner></Banner>
-      <div className="text-3xl text-black">
-        {category}
+      {category==='popular' && <Banner></Banner>}
+      
+      <div className="grid grid-cols-2 gap-5">
+        {
+          products.map((product)=><ShowProductCard
+          key={product._id}
+          product={product}
+          ></ShowProductCard>)
+        }
       </div>
 
     </div>
