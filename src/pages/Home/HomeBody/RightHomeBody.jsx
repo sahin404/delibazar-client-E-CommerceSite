@@ -20,7 +20,7 @@ const RightHomeBody = ({ category }) => {
     <div>
       {category==='popular' && <Banner></Banner>}
       
-      <div className="grid grid-cols-2 gap-5">
+      <div className="grid grid-cols-3 gap-5 px-5 py-3">
         {
           products.map((product)=><ShowProductCard
           key={product._id}
