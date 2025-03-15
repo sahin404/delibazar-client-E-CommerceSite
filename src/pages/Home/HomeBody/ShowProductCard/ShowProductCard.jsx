@@ -11,7 +11,7 @@ const ShowProductCard = ({product}) => {
         <p>দাম: {price}৳</p>
     </div>
     <div className="flex items-center justify-center gap-3 flex-wrap">
-        <button className="rounded-lg bg-[#233A95] px-4 py-2 font-semibold text-white duration-300 hover:scale-105 hover:bg-sky-600">বিস্তারিত</button>
+        <button className="rounded-lg bg-[#233A95] px-4 py-2 font-semibold text-white duration-300 hover:scale-105 ">বিস্তারিত</button>
         <button className="rounded-lg bg-[#EF4444] px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:">ব্যাগে যোগ করুন</button>
     </div>
 </div>
