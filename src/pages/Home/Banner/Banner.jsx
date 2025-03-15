@@ -22,6 +22,8 @@ const Banner = () => {
                     <img src={img2} alt="Slide 1" className=" rounded-lg w-full h-full object-cover flex-shrink-0" />
                     <img src={img3} alt="Slide 2" className=" rounded-lg w-full h-full object-cover flex-shrink-0" />
                     <img src={img1} alt="Slide 3" className=" rounded-lg w-full h-full object-cover flex-shrink-0" />
+                    {/* <img src="https://ibb.co.com/LXjz2x0S" alt="Slide 3" className=" rounded-lg w-full h-full object-cover flex-shrink-0" /> */}
+                    
                 </div>
             </div>
 
