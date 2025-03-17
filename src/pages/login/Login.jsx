@@ -1,8 +1,10 @@
+import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const Login = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-orange-100 p-4 relative">
+
             {/* Background Image Container */}
             <div
                 className="absolute inset-0 bg-cover bg-center blur-sm opacity-80"
@@ -11,6 +13,15 @@ const Login = () => {
                 }}
             ></div>
             <div className="absolute inset-0 bg-black bg-opacity-40"></div>
+            {/* Return Button */}
+            <Link to="/">
+                <button className="absolute left-fullabsolute top-5 left-5 bg-white bg-opacity-80 text-gray-800 px-4 py-2 rounded-md shadow-md hover:bg-opacity-100 transition-all bg-white p-3 rounded-lg">
+                <div className="flex items-center gap-2">
+                <IoArrowBackCircleOutline /> 
+                    <p>পূর্বের পৃষ্ঠায় ফিরে যান</p>
+                </div>
+                </button>
+            </Link>
 
             {/* Login Form */}
             <div className="bg-white p-6 rounded-2xl shadow-md w-[80%] max-w-md relative z-10">
@@ -39,7 +50,7 @@ const Login = () => {
                     {/* To do: functionlity */}
                     <p>পাসওয়ার্ড ভুলে গেছেন? </p>
                 </div>
-                <button className="w-full bg-green-600 text-white p-2 rounded-md font-semibold hover:bg-green-700 mt-4">
+                <button className="w-full bg-[#233A95] text-white p-2 rounded-md font-semibold hover:bg-[#101b44] mt-4 duration-200">
                     লগইন
                 </button>
                 <div className="flex items-center justify-center mt-4">

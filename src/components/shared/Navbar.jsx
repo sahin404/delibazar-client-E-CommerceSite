@@ -46,7 +46,7 @@ const Navbar = () => {
 
         <div className="flex items-center gap-2 text-white bg-[#233A95] p-3 rounded-lg text-sm hover:scale-105 duration-300">
           <FaRegUser className="text-md" />
-          <button className="">লগইন / নিবন্ধন</button>
+          <Link to="/login"><button className="">লগইন / নিবন্ধন</button></Link>
         </div>
       </div>
 
