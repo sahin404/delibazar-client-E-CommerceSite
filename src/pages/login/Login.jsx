@@ -12,9 +12,11 @@ const Login = () => {
           errors.email = 'Invalid email address';
         }
         if(!values.password){
-            errors.passwordv= 'Required';
+            errors.password= 'Required';
         }
-      
+        else if(values.password.length<6){
+            errors.password = 'Your Password is Minimum 6 Characters.'
+        }
         return errors;
       };
 
@@ -82,6 +84,7 @@ const Login = () => {
                         onBlur={formik.handleBlur}
                         value={formik.values.password}
                     />
+                    {formik.touched.password && formik.errors.password? <div className="text-red-600 text-sm">{formik.errors.password}</div>:null }
                 </div>
                 <div className="flex items-center text-sm underline">
                     {/* To do: functionlity */}
