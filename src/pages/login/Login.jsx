@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const Login = () => {
     return (
         <div className="min-h-screen flex items-center justify-center bg-orange-100 p-4 relative">
@@ -8,43 +10,40 @@ const Login = () => {
                     backgroundImage: "url('/img1.png')",
                 }}
             ></div>
+            <div className="absolute inset-0 bg-black bg-opacity-40"></div>
 
             {/* Login Form */}
             <div className="bg-white p-6 rounded-2xl shadow-md w-[80%] max-w-md relative z-10">
-                <div className="text-center">
-                    <span className="h-10">
-                        <img src="/logo.png" alt="" />
+                <div className="text-center mb-7 pt-4">
+                    <span className="text-2xl font-semibold">
+                        একাউন্টে প্রবেশ করুন
                     </span>
-                    <p className="text-gray-600">iOrtin Mleata, & One</p>
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Purchasing Route</label>
+                    <label className="block text-gray-700">ইমেইল</label>
                     <input
                         type="text"
                         className="w-full p-2 border rounded-md mt-1"
-                        placeholder="Groceries"
+                        placeholder="আপনার ইমেইল দিন"
                     />
                 </div>
                 <div className="mb-4">
-                    <label className="block text-gray-700">Security Holis</label>
+                    <label className="block text-gray-700">পাসওয়ার্ড</label>
                     <input
                         type="password"
                         className="w-full p-2 border rounded-md mt-1"
                         placeholder="********"
                     />
                 </div>
-                <div className="flex items-center mb-4">
-                    <input type="checkbox" id="carocars" className="mr-2" />
-                    <label htmlFor="carocars" className="text-gray-700">Carocars</label>
+                <div className="flex items-center text-sm underline">
+                    {/* To do: functionlity */}
+                    <p>পাসওয়ার্ড ভুলে গেছেন? </p>
                 </div>
-                <button className="w-full bg-green-600 text-white p-2 rounded-md font-semibold hover:bg-green-700">
-                    Login
+                <button className="w-full bg-green-600 text-white p-2 rounded-md font-semibold hover:bg-green-700 mt-4">
+                    লগইন
                 </button>
-                <div className="flex items-center mt-4">
-                    <input type="checkbox" id="policy" className="mr-2" />
-                    <label htmlFor="policy" className="text-gray-700 text-sm">
-                        Rue bruey Plial schnda
-                    </label>
+                <div className="flex items-center justify-center mt-4">
+                    <p>এই ওয়েবসাইটে নতুন? <Link to="/register" className="text-blue-600 hover:underline">রেজিষ্টার</Link> করুন</p>
                 </div>
             </div>
         </div>
