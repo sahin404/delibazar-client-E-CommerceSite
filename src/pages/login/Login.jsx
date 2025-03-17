@@ -1,7 +1,35 @@
+import { useFormik } from "formik";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 
 const Login = () => {
+
+    const validate = values => {
+        const errors = {};
+        if (!values.email) {
+          errors.email = 'Required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+          errors.email = 'Invalid email address';
+        }
+        if(!values.password){
+            errors.passwordv= 'Required';
+        }
+      
+        return errors;
+      };
+
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        validate,
+        onSubmit: values => {
+            console.log(values);
+        },
+
+    })
+
     return (
         <div className="min-h-screen flex items-center justify-center bg-orange-100 p-4 relative">
 
@@ -16,15 +44,15 @@ const Login = () => {
             {/* Return Button */}
             <Link to="/">
                 <button className="absolute left-fullabsolute top-5 left-5 bg-white bg-opacity-80 text-gray-800 px-4 py-2 rounded-md shadow-md hover:bg-opacity-100 transition-all bg-white p-3 rounded-lg">
-                <div className="flex items-center gap-2">
-                <IoArrowBackCircleOutline /> 
-                    <p>পূর্বের পৃষ্ঠায় ফিরে যান</p>
-                </div>
+                    <div className="flex items-center gap-2">
+                        <IoArrowBackCircleOutline />
+                        <p>পূর্বের পৃষ্ঠায় ফিরে যান</p>
+                    </div>
                 </button>
             </Link>
 
             {/* Login Form */}
-            <div className="bg-white p-6 rounded-2xl shadow-md w-[80%] max-w-md relative z-10">
+            <form onSubmit={formik.handleSubmit} className="bg-white p-6 rounded-2xl shadow-md w-[80%] max-w-md relative z-10">
                 <div className="text-center mb-7 pt-4">
                     <span className="text-2xl font-semibold">
                         একাউন্টে প্রবেশ করুন
@@ -34,29 +62,38 @@ const Login = () => {
                     <label className="block text-gray-700">ইমেইল</label>
                     <input
                         type="text"
+                        name="email"
                         className="w-full p-2 border rounded-md mt-1"
                         placeholder="আপনার ইমেইল দিন"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.email}
                     />
+                    { formik.touched.email && formik.errors.email? <div className="text-red-600 text-sm">{formik.errors.email}</div>:null}
                 </div>
                 <div className="mb-4">
                     <label className="block text-gray-700">পাসওয়ার্ড</label>
                     <input
                         type="password"
+                        name="password"
                         className="w-full p-2 border rounded-md mt-1"
                         placeholder="********"
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                        value={formik.values.password}
                     />
                 </div>
                 <div className="flex items-center text-sm underline">
                     {/* To do: functionlity */}
                     <p>পাসওয়ার্ড ভুলে গেছেন? </p>
                 </div>
-                <button className="w-full bg-[#233A95] text-white p-2 rounded-md font-semibold hover:bg-[#101b44] mt-4 duration-200">
+                <button type="submit" className="w-full bg-[#233A95] text-white p-2 rounded-md font-semibold hover:bg-[#101b44] mt-4 duration-200">
                     লগইন
                 </button>
                 <div className="flex items-center justify-center mt-4">
                     <p>এই ওয়েবসাইটে নতুন? <Link to="/register" className="text-blue-600 hover:underline">রেজিষ্টার</Link> করুন</p>
                 </div>
-            </div>
+            </form>
         </div>
     );
 };
