@@ -6,17 +6,17 @@ import Footer from "../components/shared/Footer"
 
 const Main = () => { 
   const location = useLocation();
-  
+  // console.log(location);
   return (
     <div>
       <div className={`font-bangla ${location.pathname === '/' ? 'bg-white' : 'bg-[#F3F4F7]'}`}>
-        <Header></Header>
+        {location.pathname!='/login' && location.pathname!='/register' &&  <Header></Header>}
         <div className="bg-white">
-          <Header2></Header2>
+        {location.pathname!='/login' && location.pathname!='/register' &&  <Header2></Header2>}
         </div>
         <div className=" bg-white">
           <div className="max-w-6xl mx-auto">
-            <Navbar></Navbar>
+          {location.pathname!='/login' && location.pathname!='/register' &&  <Navbar></Navbar>}
           </div>
           <div className="border-b">
 
@@ -25,7 +25,7 @@ const Main = () => {
         <div className="">
           <Outlet></Outlet>
         </div>
-        <Footer></Footer>
+        {location.pathname!='/login' && location.pathname!='/register' &&  <Footer></Footer>}
       </div>
     </div>
 
