@@ -1,9 +1,14 @@
 import { useFormik } from "formik";
+import { useContext, useState } from "react";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Register = () => {
-
+  const { signUp, logOut, updatePro } = useContext(AuthContext);
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
   const validate = values => {
     const errors = {};
     if (!values.name) {
@@ -38,7 +43,23 @@ const Register = () => {
     },
     validate,
     onSubmit: values => {
-      console.log(values);
+      setError("");
+      signUp(values.email, values.password)
+        .then(() => {
+          updatePro(values.name);
+          logOut();
+          navigate('/login');
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your Account has been ceate succesfully!",
+            showConfirmButton: false,
+            timer: 1000
+          });
+        })
+        .catch(() => {
+          setError("An Error Occured. Please Try Again!");
+        })
     },
 
   })
@@ -114,6 +135,9 @@ const Register = () => {
         <button type="submit" className="w-full bg-[#233A95] text-white p-2 rounded-md font-semibold hover:bg-[#101b44] mt-4 duration-200">
           রেজিষ্টার
         </button>
+        <div>{
+          error ? <div className="text-sm mt-3 text-red-600 text-center">{error}</div> : null
+        }</div>
         <div className="flex items-center justify-center mt-4">
           <p>ইতোমধ্যে একাউন্ট আছে? <Link to="/login" className="text-blue-600 hover:underline">লগইন</Link> করুন</p>
         </div>
