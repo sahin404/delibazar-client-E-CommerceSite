@@ -111,7 +111,7 @@ const Register = () => {
                     রেজিষ্টার
                 </button>
                 <div className="flex items-center justify-center mt-4">
-                    <p>ইতোমধ্যে একাউন্ট আছে? <Link to="/register" className="text-blue-600 hover:underline">লগইন</Link> করুন</p>
+                    <p>ইতোমধ্যে একাউন্ট আছে? <Link to="/login" className="text-blue-600 hover:underline">লগইন</Link> করুন</p>
                 </div>
             </form>
         </div>
