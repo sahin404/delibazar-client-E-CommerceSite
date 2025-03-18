@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
 import { useContext, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { MdCancel } from "react-icons/md";
 
-const LoginModal = () => {
+const LoginModal = ({ onClose }) => {
 
     const [error, setError] = useState("");
     const { signIn } = useContext(AuthContext);
-    const navigate = useNavigate();
     const validate = values => {
         const errors = {};
         if (!values.email) {
@@ -34,8 +34,7 @@ const LoginModal = () => {
             setError("");
             signIn(values.email, values.password)
                 .then(() => {
-                    // console.log('Successfully Logged In');
-                    navigate('/');
+                    onClose()
                 })
                 .catch(() => {
                     setError("Invalid Username or Password! Try Again");
@@ -49,6 +48,9 @@ const LoginModal = () => {
             <div className="min-h-screen flex items-center justify-center  p-4 relative">
                 {/* Login Form */}
                 <form onSubmit={formik.handleSubmit} className="bg-white p-6 rounded-2xl shadow-md w-[80%] max-w-md relative z-10">
+                    <div className="flex justify-end text-2xl">
+                        <button onClick={onClose}><MdCancel /></button>
+                    </div>
                     <div className="text-center mb-7 pt-4">
                         <span className="text-2xl font-semibold">
                             একাউন্টে প্রবেশ করুন

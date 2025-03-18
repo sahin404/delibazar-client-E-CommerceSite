@@ -1,18 +1,16 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom"
+import { Link,useParams } from "react-router-dom"
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import { FaHeadset, FaLeaf, FaLock, FaShippingFast, FaUndo } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import Login from "../login/login";
 import LoginModal from "../../components/nonShared/loginModal";
 
 const ShowProductDetails = () => {
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
     const [product, setProduct] = useState([]);
-    const [showModal,setShowModal] = useState(false);
+    const [showModal,setShowModal] = useState(true);
     const {user} = useContext(AuthContext);
-    const navigate = useNavigate(); 
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -80,7 +78,7 @@ const ShowProductDetails = () => {
             </div>
             {/* Modal showing */}
             <div>
-                {showModal && <LoginModal></LoginModal>}
+                {showModal && <LoginModal onClose={()=>setShowModal(false)}></LoginModal>}
             </div>
 
         </div>
