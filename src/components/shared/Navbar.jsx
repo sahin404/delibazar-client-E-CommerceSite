@@ -43,11 +43,15 @@ const Navbar = () => {
           <h1 className="text-sm">৳</h1>
           <h1>০০.০০</h1>
         </div>
+        <Link to="/login">
+          <div className="flex items-center gap-2 text-white bg-[#233A95] p-3 rounded-lg text-sm hover:scale-105 duration-300">
 
-        <div className="flex items-center gap-2 text-white bg-[#233A95] p-3 rounded-lg text-sm hover:scale-105 duration-300">
-          <FaRegUser className="text-md" />
-          <Link to="/login"><button className="">লগইন / নিবন্ধন</button></Link>
-        </div>
+            <button className=""> <div className="flex gap-2 items-center">
+              <FaRegUser className="text-md" />
+              <p>লগইন / নিবন্ধন</p>
+            </div></button>
+          </div>
+        </Link>
       </div>
 
     </div>

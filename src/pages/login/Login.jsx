@@ -1,8 +1,12 @@
 import { useFormik } from "formik";
+import { useContext } from "react";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Login = () => {
+
+    const {signIn} = useContext(AuthContext);
 
     const validate = values => {
         const errors = {};
@@ -27,7 +31,13 @@ const Login = () => {
         },
         validate,
         onSubmit: values => {
-            console.log(values);
+            signIn(values.email,values.password)
+            .then(()=>{
+                console.log('Successfully Logged In');
+            })
+            .catch(()=>{
+                console.log('an error');
+            })
         },
 
     })
