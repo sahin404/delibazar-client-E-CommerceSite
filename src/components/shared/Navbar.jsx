@@ -16,6 +16,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logOut();
+    setShowDropdown(false); 
   };
 
   // Close dropdown when clicking outside

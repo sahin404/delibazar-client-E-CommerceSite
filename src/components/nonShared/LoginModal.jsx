@@ -44,7 +44,7 @@ const LoginModal = ({ onClose }) => {
     })
 
     return (
-        <div className="bg-black fixed inset-0 bg-opacity-30 backdrop-blur-sm">
+        <div className="bg-black fixed inset-0 bg-opacity-30 backdrop-blur-sm z-10">
             <div className="min-h-screen flex items-center justify-center  p-4 relative">
                 {/* Login Form */}
                 <form onSubmit={formik.handleSubmit} className="bg-white p-6 rounded-2xl shadow-md w-[80%] max-w-md relative z-10">

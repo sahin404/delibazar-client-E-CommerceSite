@@ -9,9 +9,9 @@ const ShowProductDetails = () => {
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
     const [product, setProduct] = useState([]);
-    const [showModal,setShowModal] = useState(true);
+    const [showModal,setShowModal] = useState(false);
     const {user} = useContext(AuthContext);
-
+    
     useEffect(() => {
         const fetchItems = async () => {
             const response = await axiosPublic.get(`/product/${id}`)
@@ -20,12 +20,17 @@ const ShowProductDetails = () => {
         fetchItems();
     }, [axiosPublic, id])
     const { name, picture, price, stock_status, _id, category, description } = product;
+    
+    
     const handleAddToCart = () =>{
         if(!user){
+            // if(loading){
+            //     return <progress className="progress w-56"></progress>
+            // }
             setShowModal(true);
         }
         else{
-            console.log('yes');
+            // console.log('yes');
         }
     }
     return (
@@ -42,7 +47,7 @@ const ShowProductDetails = () => {
                 </h1>
                 <div className="flex items-center gap-3 flex-wrap">
 
-                    <Link to={`/product/${_id}`}><button className="rounded-lg bg-[#233A95] px-14 py-2 text-white duration-300 hover:scale-105 ">কিনুন</button></Link>
+                    <Link to={`/product/${_id}`}><button onClick={handleAddToCart} className="rounded-lg bg-[#233A95] px-14 py-2 text-white duration-300 hover:scale-105 ">কিনুন</button></Link>
                     <button onClick={handleAddToCart} className="rounded-lg bg-[#EF4444] px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:"> + ব্যাগে যোগ করুন</button>
                 </div>
                 <div className="">
