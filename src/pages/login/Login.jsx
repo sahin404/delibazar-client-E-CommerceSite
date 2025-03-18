@@ -1,13 +1,14 @@
 import { useFormik } from "formik";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { IoArrowBackCircleOutline } from "react-icons/io5";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
 const Login = () => {
 
+    const [error, setError] = useState("");
     const {signIn} = useContext(AuthContext);
-
+    const navigate = useNavigate();
     const validate = values => {
         const errors = {};
         if (!values.email) {
@@ -31,12 +32,14 @@ const Login = () => {
         },
         validate,
         onSubmit: values => {
+            setError("");
             signIn(values.email,values.password)
             .then(()=>{
-                console.log('Successfully Logged In');
+                // console.log('Successfully Logged In');
+                navigate('/');
             })
             .catch(()=>{
-                console.log('an error');
+                setError("Invalid Username or Password! Try Again");
             })
         },
 
@@ -103,6 +106,9 @@ const Login = () => {
                 <button type="submit" className="w-full bg-[#233A95] text-white p-2 rounded-md font-semibold hover:bg-[#101b44] mt-4 duration-200">
                     লগইন
                 </button>
+                <div>
+                    {error? <div className="text-center text-sm text-red-600 mt-3">{error}</div>:null}
+                </div>
                 <div className="flex items-center justify-center mt-4">
                     <p>এই ওয়েবসাইটে নতুন? <Link to="/register" className="text-blue-600 hover:underline">রেজিষ্টার</Link> করুন</p>
                 </div>
