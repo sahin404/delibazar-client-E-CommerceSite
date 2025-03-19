@@ -3,6 +3,7 @@ import Navbar from "../components/shared/Navbar"
 import Header from "../components/nonShared/Header"
 import Header2 from "../components/nonShared/Header2"
 import Footer from "../components/shared/Footer"
+import MyCartDrawer from "../pages/MyCartDrawer/MyCartDrawer"
 
 const Main = () => { 
   const location = useLocation();
@@ -27,6 +28,7 @@ const Main = () => {
         </div>
         {location.pathname!='/login' && location.pathname!='/register' &&  <Footer></Footer>}
       </div>
+      <MyCartDrawer></MyCartDrawer>
     </div>
 
   )

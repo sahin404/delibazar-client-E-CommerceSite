@@ -5,9 +5,9 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { MdCancel } from "react-icons/md";
 
 const LoginModal = ({ onClose }) => {
-
     const [error, setError] = useState("");
     const { signIn } = useContext(AuthContext);
+
     const validate = values => {
         const errors = {};
         if (!values.email) {
@@ -35,6 +35,7 @@ const LoginModal = ({ onClose }) => {
             signIn(values.email, values.password)
                 .then(() => {
                     onClose()
+                    
                 })
                 .catch(() => {
                     setError("Invalid Username or Password! Try Again");
@@ -97,8 +98,9 @@ const LoginModal = ({ onClose }) => {
                     </div>
                 </form>
             </div>
+            
         </div>
-
+        
     );
 
 }

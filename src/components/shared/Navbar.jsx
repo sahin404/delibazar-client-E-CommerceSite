@@ -4,10 +4,12 @@ import { FiShoppingCart } from "react-icons/fi";
 import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { user, logOut } = useContext(AuthContext);
+  const {openDrawer} = useContext(DrawerContext);
   const dropdownRef = useRef(null); // Added reference to the dropdown
 
   const handleDropdownToggle = () => {
@@ -58,14 +60,14 @@ const Navbar = () => {
       {/* Right Side */}
       <div className="flex gap-3 items-center">
         {/* Cart Icon */}
-        <Link to="/cart">
+        <button onClick={openDrawer}>
           <div>
             <div className="relative w-fit opacity-80 cursor-pointer bg-[#F3F4F7] p-3 rounded-full">
               <FiShoppingCart className="text-2xl text-black" />
               <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-600 text-center text-[10px] text-white">১২</span>
             </div>
           </div>
-        </Link>
+        </button>
 
         {/* Currency Display */}
         <div className="flex items-center gap-1">
@@ -88,8 +90,8 @@ const Navbar = () => {
               {/* Dropdown Menu */}
               {showDropdown && (
                 <div className="absolute right-0 mt-2 bg-white shadow-lg rounded-lg w-48 p-3 z-10">
-                  <Link to="/cart">
-                    <button className="block w-full text-left py-2 px-4 text-sm hover:bg-gray-200 rounded-lg">
+                  <Link>
+                    <button onClick={openDrawer} className="block w-full text-left py-2 px-4 text-sm hover:bg-gray-200 rounded-lg">
                       My Cart
                     </button>
                   </Link>
