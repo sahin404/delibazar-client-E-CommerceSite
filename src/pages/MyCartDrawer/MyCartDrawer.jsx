@@ -60,10 +60,9 @@ const MyCartDrawer = () => {
           </button>
 
           {/* Drawer Content */}
-          <ul className="menu text-base-content mt-8">
-            <li><a>Cart Item 1</a></li>
-            <li><a>Cart Item 2</a></li>
-          </ul>
+          <div>
+            hell
+          </div>
         </div>
       </div>
     </div>
