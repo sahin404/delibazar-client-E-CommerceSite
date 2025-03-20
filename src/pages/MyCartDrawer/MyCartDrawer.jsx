@@ -9,7 +9,12 @@ const MyCartDrawer = () => {
   const overlayRef = useRef(null);
   const [carts,refetch] = useCarts();
 
-
+  useEffect(() => {
+    if (isOpen) {
+      refetch(); // Trigger refetch when the drawer opens
+    }
+  }, [isOpen, refetch]); // Only run this when `isOpen` changes
+  
   // Close drawer when clicking anywhere outside of the drawer
   useEffect(() => {
     const handleClickOutside = (event) => {
