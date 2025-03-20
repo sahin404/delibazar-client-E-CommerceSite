@@ -6,6 +6,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import LoginModal from "../../components/nonShared/loginModal";
 import useAxiosSecure from "../../hooks/useAxiosPublic/useAxiosSecure";
 import { toast, ToastContainer } from "react-toastify";
+import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";
 
 const ShowProductDetails = () => {
     const { id } = useParams();
@@ -14,7 +15,7 @@ const ShowProductDetails = () => {
     const [product, setProduct] = useState([]);
     const [showModal, setShowModal] = useState(false);
     const { user } = useContext(AuthContext);
-
+    const { openDrawer } = useContext(DrawerContext);
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -24,7 +25,21 @@ const ShowProductDetails = () => {
         fetchItems();
     }, [axiosPublic, id])
     const { name, picture, price, stock_status, _id, category, description } = product;
-
+    const handleBuy = () => {
+        if (!user) {
+            setShowModal(true);
+        }
+        else {
+            const cartInfo = {
+                userEmail: user.email,
+                name,
+                picture,
+                price,
+                id
+            }
+            axiosSecure.post('/carts', cartInfo)
+        }
+    }
 
     const handleAddToCart = () => {
         if (!user) {
@@ -39,7 +54,7 @@ const ShowProductDetails = () => {
                 name,
                 picture,
                 price,
-                id
+                id:_id
             }
             axiosSecure.post('/carts', cartInfo)
                 .then(res => {
@@ -71,7 +86,10 @@ const ShowProductDetails = () => {
                 </h1>
                 <div className="flex items-center gap-3 flex-wrap">
 
-                    <Link to={`/product/${_id}`}><button onClick={handleAddToCart} className="rounded-lg bg-[#233A95] px-14 py-2 text-white duration-300 hover:scale-105 ">কিনুন</button></Link>
+                    <Link to={`/product/${_id}`}><button onClick={() => {
+                        openDrawer()
+                        handleBuy()
+                    }} className="rounded-lg bg-[#233A95] px-14 py-2 text-white duration-300 hover:scale-105 ">কিনুন</button></Link>
                     <button onClick={handleAddToCart} className="rounded-lg bg-[#EF4444] px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:"> + ব্যাগে যোগ করুন</button>
                 </div>
                 <div className="">
