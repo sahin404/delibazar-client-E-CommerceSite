@@ -7,6 +7,7 @@ import LoginModal from "../../components/nonShared/loginModal";
 import useAxiosSecure from "../../hooks/useAxiosPublic/useAxiosSecure";
 import { toast, ToastContainer } from "react-toastify";
 import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";
+import useCarts from "../../hooks/useCarts/useCarts";
 
 const ShowProductDetails = () => {
     const { id } = useParams();
@@ -16,6 +17,7 @@ const ShowProductDetails = () => {
     const [showModal, setShowModal] = useState(false);
     const { user } = useContext(AuthContext);
     const { openDrawer } = useContext(DrawerContext);
+    const [,refetch] = useCarts();
 
     useEffect(() => {
         const fetchItems = async () => {
@@ -38,6 +40,7 @@ const ShowProductDetails = () => {
                 id
             }
             axiosSecure.post('/carts', cartInfo)
+            refetch();
         }
     }
 
@@ -69,6 +72,7 @@ const ShowProductDetails = () => {
                         });
                     }
                 })
+            refetch();
         }
     }
     return (
