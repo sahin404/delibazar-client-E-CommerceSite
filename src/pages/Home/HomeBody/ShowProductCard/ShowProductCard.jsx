@@ -4,12 +4,14 @@ import { AuthContext } from "../../../../AuthProvider/AuthProvider";
 import LoginModal from "../../../../components/nonShared/loginModal";
 import { toast, ToastContainer } from "react-toastify";
 import useAxiosSecure from "../../../../hooks/useAxiosPublic/useAxiosSecure";
+import useCarts from "../../../../hooks/useCarts/useCarts";
 
 const ShowProductCard = ({ product }) => {
     const { name, picture, price, stock_status, _id } = product;
     const { user } = useContext(AuthContext);
     const [showModal, setShowModal] = useState(false);
     const axiosSecure = useAxiosSecure();
+    const [,refetch] = useCarts();
     const handleAddToCard = () => {
         if (!user) {
             // if(loading){
@@ -38,6 +40,7 @@ const ShowProductCard = ({ product }) => {
                             closeOnClick: true,      // Close the toast on click
                             draggable: true,         // Enable dragging of toast
                         });
+                        refetch();
                     }
                 })
         }

@@ -5,13 +5,25 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";
+import useCarts from "../../hooks/useCarts/useCarts";
 
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { user, logOut } = useContext(AuthContext);
   const {openDrawer} = useContext(DrawerContext);
   const dropdownRef = useRef(null); // Added reference to the dropdown
+  const [carts,refetch] = useCarts();
 
+  // if(loading){
+  //   return <progress className="progress w-56"></progress>;
+  // }
+
+  useEffect(() => {
+    if (user) {
+      refetch(); // Refetch carts when the user is logged in
+    }
+  }, [user, refetch]);
+  
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
   };
@@ -35,6 +47,7 @@ const Navbar = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
 
   return (
     <div className="flex items-center justify-between gap-5">
@@ -64,7 +77,7 @@ const Navbar = () => {
           <div>
             <div className="relative w-fit opacity-80 cursor-pointer bg-[#F3F4F7] p-3 rounded-full">
               <FiShoppingCart className="text-2xl text-black" />
-              <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-600 text-center text-[10px] text-white">১২</span>
+              <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-600 text-center text-[10px] text-white">{carts.length}</span>
             </div>
           </div>
         </button>
