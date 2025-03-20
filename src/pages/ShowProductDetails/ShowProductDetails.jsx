@@ -4,13 +4,17 @@ import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import { FaHeadset, FaLeaf, FaLock, FaShippingFast, FaUndo } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import LoginModal from "../../components/nonShared/loginModal";
+import useAxiosSecure from "../../hooks/useAxiosPublic/useAxiosSecure";
+import { toast, ToastContainer } from "react-toastify";
 
 const ShowProductDetails = () => {
     const { id } = useParams();
     const axiosPublic = useAxiosPublic();
+    const axiosSecure = useAxiosSecure();
     const [product, setProduct] = useState([]);
     const [showModal,setShowModal] = useState(false);
     const {user} = useContext(AuthContext);
+
     
     useEffect(() => {
         const fetchItems = async () => {
@@ -30,11 +34,31 @@ const ShowProductDetails = () => {
             setShowModal(true);
         }
         else{
-            // console.log('yes');
+            const cartInfo = {
+                userEmail: user.email,
+                name,
+                picture,
+                price,
+                id
+            }
+            axiosSecure.post('/carts', cartInfo)
+            .then(res=>{
+                // console.log(res);
+                if(res.data.insertedId){
+                    toast.success('Item added to cart!', {
+                        position: "top-center",  // Centered at the top of the page
+                        autoClose: 3000,         // Auto close after 3 seconds
+                        hideProgressBar: true,   // Optionally hide progress bar
+                        closeOnClick: true,      // Close the toast on click
+                        draggable: true,         // Enable dragging of toast
+                    });
+                }
+            })
         }
     }
     return (
         <div className="max-w-6xl mx-auto py-14 flex justify-center items-center gap-10 bg-white p-5">
+            <ToastContainer />
             <div className="">
                 <img className="max-h-[400px]" src={picture} alt="" />
             </div>
@@ -85,7 +109,7 @@ const ShowProductDetails = () => {
             <div>
                 {showModal && <LoginModal onClose={()=>setShowModal(false)}></LoginModal>}
             </div>
-
+            
         </div>
     )
 }
