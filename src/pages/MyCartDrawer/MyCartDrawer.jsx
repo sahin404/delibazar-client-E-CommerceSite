@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef} from "react";
 import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";
 import { ImCancelCircle } from "react-icons/im";
 
@@ -6,6 +6,8 @@ const MyCartDrawer = () => {
   const { isOpen, closeDrawer } = useContext(DrawerContext);
   const drawerRef = useRef(null);
   const overlayRef = useRef(null);
+
+
 
   // Close drawer when clicking anywhere outside of the drawer
   useEffect(() => {
