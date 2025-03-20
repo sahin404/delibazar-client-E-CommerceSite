@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link,useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import { FaHeadset, FaLeaf, FaLock, FaShippingFast, FaUndo } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
@@ -12,10 +12,10 @@ const ShowProductDetails = () => {
     const axiosPublic = useAxiosPublic();
     const axiosSecure = useAxiosSecure();
     const [product, setProduct] = useState([]);
-    const [showModal,setShowModal] = useState(false);
-    const {user} = useContext(AuthContext);
+    const [showModal, setShowModal] = useState(false);
+    const { user } = useContext(AuthContext);
 
-    
+
     useEffect(() => {
         const fetchItems = async () => {
             const response = await axiosPublic.get(`/product/${id}`)
@@ -24,16 +24,16 @@ const ShowProductDetails = () => {
         fetchItems();
     }, [axiosPublic, id])
     const { name, picture, price, stock_status, _id, category, description } = product;
-    
-    
-    const handleAddToCart = () =>{
-        if(!user){
+
+
+    const handleAddToCart = () => {
+        if (!user) {
             // if(loading){
             //     return <progress className="progress w-56"></progress>
             // }
             setShowModal(true);
         }
-        else{
+        else {
             const cartInfo = {
                 userEmail: user.email,
                 name,
@@ -42,18 +42,18 @@ const ShowProductDetails = () => {
                 id
             }
             axiosSecure.post('/carts', cartInfo)
-            .then(res=>{
-                // console.log(res);
-                if(res.data.insertedId){
-                    toast.success('Item added to cart!', {
-                        position: "top-center",  // Centered at the top of the page
-                        autoClose: 3000,         // Auto close after 3 seconds
-                        hideProgressBar: true,   // Optionally hide progress bar
-                        closeOnClick: true,      // Close the toast on click
-                        draggable: true,         // Enable dragging of toast
-                    });
-                }
-            })
+                .then(res => {
+                    // console.log(res);
+                    if (res.data.insertedId) {
+                        toast.success('Item added to cart Successfully!', {
+                            position: "top-center",  // Centered at the top of the page
+                            autoClose: 3000,         // Auto close after 3 seconds
+                            hideProgressBar: true,   // Optionally hide progress bar
+                            closeOnClick: true,      // Close the toast on click
+                            draggable: true,         // Enable dragging of toast
+                        });
+                    }
+                })
         }
     }
     return (
@@ -107,9 +107,9 @@ const ShowProductDetails = () => {
             </div>
             {/* Modal showing */}
             <div>
-                {showModal && <LoginModal onClose={()=>setShowModal(false)}></LoginModal>}
+                {showModal && <LoginModal onClose={() => setShowModal(false)}></LoginModal>}
             </div>
-            
+
         </div>
     )
 }
