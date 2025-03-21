@@ -10,9 +10,9 @@ import useCarts from "../../hooks/useCarts/useCarts";
 const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(false);
   const { user, logOut } = useContext(AuthContext);
-  const {openDrawer} = useContext(DrawerContext);
+  const { openDrawer } = useContext(DrawerContext);
   const dropdownRef = useRef(null); // Added reference to the dropdown
-  const [carts,refetch] = useCarts();
+  const [carts, refetch] = useCarts();
 
   // if(loading){
   //   return <progress className="progress w-56"></progress>;
@@ -23,14 +23,14 @@ const Navbar = () => {
       refetch(); // Refetch carts when the user is logged in
     }
   }, [user, refetch]);
-  
+
   const handleDropdownToggle = () => {
     setShowDropdown(!showDropdown);
   };
 
   const handleLogout = () => {
     logOut();
-    setShowDropdown(false); 
+    setShowDropdown(false);
   };
 
   // Close dropdown when clicking outside
@@ -85,7 +85,7 @@ const Navbar = () => {
         {/* Currency Display */}
         <div className="flex items-center gap-1">
           <h1 className="text-sm">৳</h1>
-          <h1>০০.০০</h1>
+          <h1>{(carts.reduce((total, item) => total + item.price, 0)).toLocaleString("bn-BD", { minimumFractionDigits: 2 })}</h1>
         </div>
 
         {/* User Login Section */}

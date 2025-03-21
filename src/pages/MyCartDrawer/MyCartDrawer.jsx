@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef} from "react";
+import { useContext, useEffect, useRef } from "react";
 import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";
 import { ImCancelCircle } from "react-icons/im";
 import useCarts from "../../hooks/useCarts/useCarts";
@@ -6,19 +6,16 @@ import useCarts from "../../hooks/useCarts/useCarts";
 const MyCartDrawer = () => {
   const { isOpen, closeDrawer } = useContext(DrawerContext);
   const drawerRef = useRef(null);
-  const overlayRef = useRef(null);
-  const [carts,refetch] = useCarts();
+  const [carts, refetch] = useCarts();
 
   useEffect(() => {
     if (isOpen) {
       refetch(); // Trigger refetch when the drawer opens
     }
-  }, [isOpen, refetch]); // Only run this when `isOpen` changes
-  
-  // Close drawer when clicking anywhere outside of the drawer
+  }, [isOpen, refetch]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // Check if click is outside both the drawer and the overlay
       if (drawerRef.current && !drawerRef.current.contains(event.target)) {
         closeDrawer();
       }
@@ -26,8 +23,6 @@ const MyCartDrawer = () => {
 
     if (isOpen) {
       document.addEventListener("mousedown", handleClickOutside);
-    } else {
-      document.removeEventListener("mousedown", handleClickOutside);
     }
 
     return () => {
@@ -35,45 +30,40 @@ const MyCartDrawer = () => {
     };
   }, [isOpen, closeDrawer]);
 
+  // Calculate total price
+  const totalPrice = carts.reduce((total, item) => total + item.price, 0);
+
   return (
-    <div className="drawer drawer-end">
-      {/* Drawer Toggle (programmatically controlled) */}
-      <input
-        id="my-drawer-4"
-        type="checkbox"
-        className="drawer-toggle"
-        checked={isOpen}
-        onChange={(e) => e.target.checked ? closeDrawer() : null} // Handle toggling state
-      />
-      <div className="drawer-content">
-        {/* Page content here */}
-      </div>
-
-      {/* Drawer Sidebar */}
+    <div className={`fixed inset-0 z-50 bg-black transition-all duration-500 ${isOpen ? "bg-opacity-50" : "bg-opacity-0 pointer-events-none"}`}>
       <div
-        className={`drawer-side fixed inset-0 z-50 bg-black ${isOpen ? 'bg-opacity-50' : 'bg-opacity-0 pointer-events-none'} transition-all duration-500`}
-        ref={overlayRef}
+        ref={drawerRef}
+        className={`fixed right-0 top-0 h-full w-80 bg-white shadow-lg flex flex-col transition-all duration-500 ease-out transform ${isOpen ? "translate-x-0" : "translate-x-full"}`}
       >
-        {/* Drawer Panel (with smooth sliding and opacity effect) */}
-        <div
-          ref={drawerRef}
-          className={`bg-white w-80 p-4 h-full shadow-lg relative transition-all duration-500 ease-out transform ${isOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}
-        >
-          {/* Close Button */}
-          <button
-            className="absolute top-2 right-2 p-2 text-gray-600 hover:text-black"
-            onClick={closeDrawer}
-          >
-            <ImCancelCircle />
-          </button>
+        {/* 🔝 Top Section */}
+        <div className="bg-yellow-400 p-4 flex justify-between items-center">
+          <h2 className="text-lg font-semibold">কার্টে পণ্য: {carts.length.toLocaleString("bn-BD")} টি</h2>
+          <button onClick={closeDrawer} className="text-gray-600 hover:text-black flex gap-1 items-center">
+            <ImCancelCircle className="text-xl" />
+            <div>
+              বন্ধ করুন
+            </div>
 
-          {/* Drawer Content */}
-          <div>
-            hell
-            {
-              carts.length
-            }
-          </div>
+          </button>
+        </div>
+
+        {/* 🛒 Middle Section - Product List (Scrollable) */}
+        <div className="flex-1 overflow-y-auto p-4 space-y-4">
+          {carts.length > 0 ? (
+            carts.map((item) => <div>hi</div>)
+          ) : (
+            <p className="text-center text-gray-500">কার্ট খালি!</p>
+          )}
+        </div>
+
+        {/* 🔻 Bottom Section */}
+        <div className="bg-red-500 p-4 flex justify-between items-center text-white">
+          <h2 className="text-lg font-bold">মোট: {totalPrice.toLocaleString("bn-BD")}৳</h2>
+          <button className="bg-white text-red-600 px-4 py-2 rounded-lg font-semibold hover:bg-gray-200">পেমেন্ট করুন</button>
         </div>
       </div>
     </div>
