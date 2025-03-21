@@ -31,9 +31,12 @@ const RightHomeBody = ({ category, filter }) => {
 
   return (
     <div>
-      {category === "popular" && <Banner />}
+      <div className="hidden sm:block">
+        {category === "popular" && <Banner />}
+      </div>
 
-      <div className="grid grid-cols-3 gap-5 px-5 py-3">
+
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-5 py-3">
         {products.map((product) => (
           <ShowProductCard key={product._id} product={product} />
         ))}
