@@ -87,7 +87,7 @@ const Navbar = () => {
       {/* Left */}
       <div>
         <Link to="/">
-          <img src="logo.png" className="h-20" alt="Logo" />
+          <img src="logo.png" className=" h-16 md:h-20" alt="Logo" />
         </Link>
       </div>
 
@@ -125,12 +125,12 @@ const Navbar = () => {
 
 
       {/* Right Side */}
-      <div className="flex gap-3 items-center">
+      <div className="flex gap-2 md:gap-3 items-center">
         {/* Cart Icon */}
         <button onClick={openDrawer}>
           <div>
             <div className="relative w-fit opacity-80 cursor-pointer bg-[#F3F4F7] p-3 rounded-full">
-              <FiShoppingCart className="text-2xl text-black" />
+              <FiShoppingCart className="md:text-2xl text-black" />
               <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-600 text-center text-[10px] text-white">
                 {carts.length}
               </span>
@@ -139,7 +139,7 @@ const Navbar = () => {
         </button>
 
         {/* Currency Display */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1 text-sm md:text-md ">
           <h1 className="text-sm">৳</h1>
           <h1>{carts.reduce((total, item) => total + item.price, 0).toLocaleString("bn-BD", { minimumFractionDigits: 2 })}</h1>
         </div>
@@ -149,7 +149,7 @@ const Navbar = () => {
           {user ? (
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="flex items-center gap-2 border border-black p-3 rounded-lg text-sm hover:scale-105 duration-300"
+              className="flex items-center gap-0 md:gap-2 border border-black p-1 md:p-3 rounded-lg text-sm hover:scale-105 duration-300"
             >
               <FaRegUser className="text-md" />
               <p>{user.displayName}</p>
