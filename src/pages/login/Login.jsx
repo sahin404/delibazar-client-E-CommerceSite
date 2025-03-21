@@ -46,7 +46,7 @@ const Login = () => {
     })
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-orange-100 p-4 relative">
+        <div className="min-h-screen flex items-center justify-center p-4 relative">
 
             {/* Background Image Container */}
             <div

@@ -76,7 +76,7 @@ const ShowProductDetails = () => {
         }
     }
     return (
-        <div className="max-w-6xl mx-auto py-14 flex justify-center items-center gap-10 bg-white p-5">
+        <div className="max-w-6xl mx-auto py-14 flex-col md:flex-row flex justify-center items-center gap-10 bg-white p-5">
             <ToastContainer />
             <div className="">
                 <img className="max-h-[400px]" src={picture} alt="" />
