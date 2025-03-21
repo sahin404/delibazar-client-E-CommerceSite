@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import { FaHeadset, FaLeaf, FaLock, FaShippingFast, FaUndo } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
@@ -17,64 +17,65 @@ const ShowProductDetails = () => {
     const [showModal, setShowModal] = useState(false);
     const { user } = useContext(AuthContext);
     const { openDrawer } = useContext(DrawerContext);
-    const [,refetch] = useCarts();
+    const [, refetch] = useCarts();
 
     useEffect(() => {
         const fetchItems = async () => {
-            const response = await axiosPublic.get(`/product/${id}`)
+            const response = await axiosPublic.get(`/product/${id}`);
             setProduct(response.data);
-        }
+        };
         fetchItems();
-    }, [axiosPublic, id])
+    }, [axiosPublic, id]);
+
     const { name, picture, price, stock_status, _id, category, description } = product;
+
+    const handleAddToCart = async () => {
+        if (!user) {
+            setShowModal(true);
+        } else {
+            const cartInfo = {
+                userEmail: user.email,
+                name,
+                picture,
+                price,
+                id: _id,
+            };
+    
+            try {
+                const res = await axiosSecure.post("/carts", cartInfo);
+                if (res.data.insertedId) {
+                    toast.success("Item added to cart!", {
+                        position: "top-center",
+                        autoClose: 1500, // ✅ ১.৫ সেকেন্ড পর টোষ্ট অটো বন্ধ হবে
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        draggable: true,
+                    });
+                }
+                refetch();
+            } catch (error) {
+                console.error("Error adding to cart:", error);
+            }
+        }
+    };
+    
+
     const handleBuy = () => {
         if (!user) {
             setShowModal(true);
-        }
-        else {
+        } else {
             const cartInfo = {
                 userEmail: user.email,
                 name,
                 picture,
                 price,
-                id
-            }
-            axiosSecure.post('/carts', cartInfo)
+                id,
+            };
+            axiosSecure.post("/carts", cartInfo);
             refetch();
         }
-    }
+    };
 
-    const handleAddToCart = () => {
-        if (!user) {
-            // if(loading){
-            //     return <progress className="progress w-56"></progress>
-            // }
-            setShowModal(true);
-        }
-        else {
-            const cartInfo = {
-                userEmail: user.email,
-                name,
-                picture,
-                price,
-                id:_id
-            }
-            axiosSecure.post('/carts', cartInfo)
-                .then(res => {
-                    // console.log(res);
-                    if (res.data.insertedId) {
-                        toast.success('Item added to cart Successfully!', {
-                            position: "top-center",  // Centered at the top of the page
-                            autoClose: 1500,         // Auto close after 3 seconds
-                            hideProgressBar: true,   // Optionally hide progress bar
-                            closeOnClick: true,      // Close the toast on click
-                            draggable: true,         // Enable dragging of toast
-                        });
-                    }
-                })
-            refetch();
-        }
-    }
     return (
         <div className="max-w-6xl mx-auto py-14 flex-col md:flex-row flex justify-center items-center gap-10 bg-white p-5">
             <ToastContainer />
@@ -84,23 +85,33 @@ const ShowProductDetails = () => {
             <div className="space-y-3">
                 <h1 className="text-2xl font-semibold">{name}</h1>
                 <h1 className="text-2xl font-semibold text-[#EF4444]">দামঃ {price} ৳</h1>
-                <p className="text-xs font-semibold md:text-sm">স্ট্যাটাস: {stock_status === 'in_stock' ? "স্টকে আছে" : "স্টকে নাই"}</p>
-                <h1>
-                    {description}
-                </h1>
+                <p className="text-xs font-semibold md:text-sm">
+                    স্ট্যাটাস: {stock_status === "in_stock" ? "স্টকে আছে" : "স্টকে নাই"}
+                </p>
+                <h1>{description}</h1>
                 <div className="flex items-center gap-3 flex-wrap">
-
-                    <Link to={`/product/${_id}`}><button onClick={() => {
-                        openDrawer()
-                        handleBuy()
-                    }} className="rounded-lg bg-[#233A95] px-14 py-2 text-white duration-300 hover:scale-105 ">কিনুন</button></Link>
-                    <button onClick={handleAddToCart} className="rounded-lg bg-[#EF4444] px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:"> + ব্যাগে যোগ করুন</button>
+                    <Link to={`/product/${_id}`}>
+                        <button
+                            onClick={() => {
+                                openDrawer();
+                                handleBuy();
+                            }}
+                            className="rounded-lg bg-[#233A95] px-14 py-2 text-white duration-300 hover:scale-105 "
+                        >
+                            কিনুন
+                        </button>
+                    </Link>
+                    <button
+                        onClick={handleAddToCart}
+                        className="rounded-lg bg-[#EF4444] px-4 py-2 font-semibold text-white duration-300 hover:scale-95 hover:"
+                    >
+                        + ব্যাগে যোগ করুন
+                    </button>
                 </div>
                 <div className="">
                     <h1 className="mb-3">Product Tag</h1>
                     <span className="bg-blue-500 p-1 bg-opacity-50 rounded-lg">{category}</span>
                 </div>
-
             </div>
             <div>
                 <div className="bg-gray-100 p-4 rounded-md shadow-sm max-w-sm mx-auto space-y-3">
@@ -125,15 +136,13 @@ const ShowProductDetails = () => {
                         <p className="text-gray-700 text-xs">২৪/৭ কাস্টমার সাপোর্ট, আমরা সবসময় আছি আপনার পাশে</p>
                     </div>
                 </div>
-
             </div>
             {/* Modal showing */}
             <div>
                 {showModal && <LoginModal onClose={() => setShowModal(false)}></LoginModal>}
             </div>
-
         </div>
-    )
-}
+    );
+};
 
-export default ShowProductDetails
+export default ShowProductDetails;
