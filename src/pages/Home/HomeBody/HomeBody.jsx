@@ -38,7 +38,7 @@ const HomeBody = () => {
                             ))}
                         </div>
                     </div>
-                    <RightHomeBody category={category}></RightHomeBody>
+                    <RightHomeBody category={category} filter={selected}></RightHomeBody>
                 </div>
             </div>
 
