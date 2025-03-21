@@ -3,7 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 import { FaHeadset, FaLeaf, FaLock, FaShippingFast, FaUndo } from "react-icons/fa";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
-import LoginModal from "../../components/nonShared/loginModal";
+import LoginModal from "../../components/nonShared/LoginModal";
 import useAxiosSecure from "../../hooks/useAxiosPublic/useAxiosSecure";
 import { toast, ToastContainer } from "react-toastify";
 import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";

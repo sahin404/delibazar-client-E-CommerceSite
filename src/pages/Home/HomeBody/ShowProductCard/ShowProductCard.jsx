@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../../../AuthProvider/AuthProvider";
-import LoginModal from "../../../../components/nonShared/loginModal";
+import LoginModal from "../../../../components/nonShared/LoginModal";
 import useAxiosSecure from "../../../../hooks/useAxiosPublic/useAxiosSecure";
 import { toast, ToastContainer } from "react-toastify";
 
