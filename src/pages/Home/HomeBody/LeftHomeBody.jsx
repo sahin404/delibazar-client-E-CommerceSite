@@ -43,7 +43,7 @@ const LeftHomeBody = ({ setCategory }) => {
           ].map((item) => (
             <li key={item.name}>
               <button
-                className={`text-xs md:text-[16px] flex items-center gap-2 w-full px-1 md:px-4 py-1 md:py-2 rounded-md transition-all duration-200 
+                className={`text-xs md:text-[16px] flex items-center gap-2 w-full px-1 md:px-4 py-1 md:py-3 rounded-md transition-all duration-200 
                 ${activeCategory === item.name ? "bg-red-500 text-white" : "bg-gray-200 text-gray-700"}`}
                 onClick={() => {
                   handleButton(item.name);
