@@ -92,34 +92,37 @@ const Navbar = () => {
       </div>
 
       {/* Middle (Search Bar) */}
-      <div className="relative flex items-center border-none" ref={searchRef}>
-        <input
-          type="text"
-          placeholder="প্রোডাক্ট সার্চ করুন"
-          className="font-bangla input bg-[#F3F4F7] rounded-l-lg h-12 w-[600px] text-sm border-none outline-none px-3 rounded-r-none"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        <button className="bg-[#233A95] text-white flex items-center h-12 p-3 rounded-r-lg border-none outline-none">
-          <IoSearchOutline className="text-3xl" />
-        </button>
+      <div className="hidden sm:block w-[200px] md:w-[400px] lg:w-[600px]">
+        <div className="relative flex items-center border-none" ref={searchRef}>
+          <input
+            type="text"
+            placeholder="প্রোডাক্ট সার্চ করুন"
+            className="font-bangla input bg-[#F3F4F7] w-[200px] md:w-[400px] lg:w-[600px] rounded-l-lg h-12 text-sm border-none outline-none px-3 rounded-r-none"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button className="bg-[#233A95] text-white flex items-center h-12 p-3 rounded-r-lg border-none outline-none">
+            <IoSearchOutline className="text-3xl" />
+          </button>
 
-        {/* Search Results Dropdown */}
-        {searchResults.length > 0 && (
-          <div className="absolute top-14 left-0 w-full bg-white border rounded-lg shadow-lg z-50">
-            {searchResults.map((product) => (
-              <div
-                key={product._id}
-                className="p-3 cursor-pointer hover:bg-gray-100 flex items-center gap-3"
-                onClick={() => handleProductClick(product._id)}
-              >
-                <img src={product.picture} alt={product.name} className="w-10 h-10 object-cover" />
-                <p>{product.name}</p>
-              </div>
-            ))}
-          </div>
-        )}
+          {/* Search Results Dropdown */}
+          {searchResults.length > 0 && (
+            <div className="absolute top-14 left-0 w-full bg-white border rounded-lg shadow-lg z-50">
+              {searchResults.map((product) => (
+                <div
+                  key={product._id}
+                  className="p-3 cursor-pointer hover:bg-gray-100 flex items-center gap-3"
+                  onClick={() => handleProductClick(product._id)}
+                >
+                  <img src={product.picture} alt={product.name} className="w-10 h-10 object-cover" />
+                  <p>{product.name}</p>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
+
 
       {/* Right Side */}
       <div className="flex gap-3 items-center">

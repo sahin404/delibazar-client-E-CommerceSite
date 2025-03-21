@@ -8,7 +8,7 @@ const Footer = () => {
 
       <footer className="bg-[#233A95]">
         <div className="mx-auto max-w-screen-xl space-y-8 px-4 py-12 sm:px-6 lg:space-y-16 lg:px-8">
-          <div className="flex justify-between gap-36 items-center">
+          <div className="flex flex-col md:flex-row justify-between md:gap-20 lg:gap-36 items-center">
             {/* Left Side */}
             <div className="w-1/3">
               <div className="">
@@ -29,7 +29,7 @@ const Footer = () => {
             </div>
 
             {/* right side */}
-            <div className="flex justify-between gap-10 flex-1">
+            <div className="flex flex-col mt-10 md:mt-0 md:flex-row justify-between gap-10 flex-1">
               <div>
                 <p className="font-medium text-gray-900 dark:text-white ">সেবা</p>
                 <ul className="mt-6 space-y-4 text-sm">
@@ -132,7 +132,7 @@ const Footer = () => {
 
           </div>
 
-          <p className="text-xs text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-center md:text-left text-gray-500 dark:text-gray-400">
             &copy; 2025. DeliBazar. All rights reserved.
           </p>
         </div>
