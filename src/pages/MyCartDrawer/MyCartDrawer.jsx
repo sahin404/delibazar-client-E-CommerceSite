@@ -2,6 +2,7 @@ import { useContext, useEffect, useRef } from "react";
 import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";
 import { ImCancelCircle } from "react-icons/im";
 import useCarts from "../../hooks/useCarts/useCarts";
+import ShowEachProductOnCart from "./ShowEachProductOnCart";
 
 const MyCartDrawer = () => {
   const { isOpen, closeDrawer } = useContext(DrawerContext);
@@ -54,7 +55,10 @@ const MyCartDrawer = () => {
         {/* 🛒 Middle Section - Product List (Scrollable) */}
         <div className="flex-1 overflow-y-auto p-4 space-y-4">
           {carts.length > 0 ? (
-            carts.map((item) => <div>hi</div>)
+            carts.map((item) => <ShowEachProductOnCart
+              key={item._id}
+              product={item}
+            > </ShowEachProductOnCart>)
           ) : (
             <p className="text-center text-gray-500">কার্ট খালি!</p>
           )}
