@@ -17,7 +17,7 @@ const HomeBody = () => {
             <div className="grid grid-cols-4">
                 {/* Left Side */}
                 <div className="col-span-1 border border-t-0">
-                    <div className="bg-[#F3F4F7] flex justify-center items-center h-10 py-8 border mb-2">
+                    <div className="bg-[#F3F4F7] pl-2 md:pl-0 flex justify-center items-center h-10 py-8 border mb-2">
                         প্রোডাক্ট ক্যাটাগরি
                     </div>
                     <LeftHomeBody setCategory={setCategory}></LeftHomeBody>
@@ -45,12 +45,12 @@ const HomeBody = () => {
 
                             {/* Dropdown for small devices */}
                             <select
-                                className="md:hidden border px-3 py-1 rounded w-full"
+                                className="md:hidden border px-3 py-1 rounded w-full mr-5 md:mr-0"
                                 value={selected}
                                 onChange={(e) => setSelected(e.target.value)}
                             >
                                 {options.map((option) => (
-                                    <option key={option} value={option}>
+                                    <option className="text-xs" key={option} value={option}>
                                         {option}
                                     </option>
                                 ))}
