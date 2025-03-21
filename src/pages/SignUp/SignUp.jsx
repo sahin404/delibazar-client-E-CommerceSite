@@ -5,7 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 
-const Register = () => {
+const SignUp = () => {
   const { signUp, logOut, updatePro } = useContext(AuthContext);
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -146,4 +146,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default SignUp;

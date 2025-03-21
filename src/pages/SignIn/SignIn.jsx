@@ -4,7 +4,7 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 
-const Login = () => {
+const SignIn = () => {
 
     const [error, setError] = useState("");
     const {signIn} = useContext(AuthContext);
@@ -117,4 +117,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default SignIn;
