@@ -35,7 +35,7 @@ const ShowProductCard = ({ product }) => {
                         // console.log('done');
                         toast.success('Item added to cart Successfully!', {
                             position: "top-center",  // Centered at the top of the page
-                            autoClose: 1500,         // Auto close after 3 seconds
+                            autoClose: 1000,         // Auto close after 3 seconds
                             hideProgressBar: true,   // Optionally hide progress bar
                             closeOnClick: true,      // Close the toast on click
                             draggable: true,         // Enable dragging of toast

@@ -4,14 +4,14 @@ import { Link } from "react-router-dom"
 
 const Header2 = () => {
     return (
-        <div className="h-9 border-b-black text-black/50 text-[12px] flex items-center justify-evenly border-b border-b-black/20">
+        <div className="hidden md:flex h-9 border-b-black text-black/50 text-[12px] items-center justify-evenly border-b border-b-black/20">
             <div className="flex gap-2">
                 <Link to="#" className="hover:text-red-500"><h1>আমাদের সম্পর্কে</h1></Link>
                 <Link to="#" className="hover:text-red-500"><h1>পছন্দের তালিকা</h1></Link>
                 <Link to="#" className="hover:text-red-500"><h1>তুলনা করুন</h1></Link>
             </div>
             <div className="flex items-center gap-1">
-            <VscWorkspaceTrusted />
+                <VscWorkspaceTrusted />
                 <h1>১০০% নিরাপদ ও বিশ্বস্ত অনলাইন শপিং | নিরাপদ ও নিশ্চিত হোম ডেলিভারি</h1>
             </div>
 
@@ -22,9 +22,6 @@ const Header2 = () => {
                     <option value="bn">বাংলা</option>
                 </select>
             </div>
-
-        
-
         </div>
     )
 }

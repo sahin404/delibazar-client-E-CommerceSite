@@ -11,12 +11,28 @@ import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [searchResults, setSearchResults] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
   const { user, logOut } = useContext(AuthContext);
   const { openDrawer } = useContext(DrawerContext);
   const [carts, refetch] = useCarts();
+  const menuRef = useRef(null);
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     if (user) {
@@ -126,14 +142,14 @@ const Navbar = () => {
         </div>
 
         {/* User Login Section */}
-        <div>
+        <div className="relative" ref={menuRef}>
           {user ? (
             <button
-              onClick={logOut}
-              className="flex items-center gap-2 text-white bg-[#233A95] p-3 rounded-lg text-sm hover:scale-105 duration-300"
+              onClick={() => setIsOpen(!isOpen)}
+              className="flex items-center gap-2 border border-black p-3 rounded-lg text-sm hover:scale-105 duration-300"
             >
               <FaRegUser className="text-md" />
-              <p>লগআউট</p>
+              <p>{user.displayName}</p>
             </button>
           ) : (
             <Link to="/login">
@@ -142,6 +158,23 @@ const Navbar = () => {
                 <p>লগইন / নিবন্ধন</p>
               </div>
             </Link>
+          )}
+
+          {isOpen && user && (
+            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg">
+              <button
+                onClick={openDrawer}
+                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+              >
+                🛒 My Cart
+              </button>
+              <button
+                onClick={logOut}
+                className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+              >
+                🚪 Logout
+              </button>
+            </div>
           )}
         </div>
       </div>
