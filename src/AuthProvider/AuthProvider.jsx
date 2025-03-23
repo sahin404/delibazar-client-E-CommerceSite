@@ -7,7 +7,7 @@ export const AuthContext = createContext(null);
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
 
 
   const signUp = (email, password) => {
@@ -27,7 +27,6 @@ const AuthProvider = ({ children }) => {
 }
 
   const logOut = () => {
-    setLoading(true);
     return signOut(auth);
   }
 
