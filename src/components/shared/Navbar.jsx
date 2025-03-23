@@ -15,11 +15,12 @@ const Navbar = () => {
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-  const { user, logOut } = useContext(AuthContext);
+  const { user, logOut, loading } = useContext(AuthContext);
   const { openDrawer } = useContext(DrawerContext);
   const [carts, refetch] = useCarts();
   const menuRef = useRef(null);
 
+  
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -75,6 +76,13 @@ const Navbar = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
+  if(loading){
+    return (
+      <div className="flex justify-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
   // Navigate to product details
   const handleProductClick = (id) => {
     navigate(`/product/${id}`);
