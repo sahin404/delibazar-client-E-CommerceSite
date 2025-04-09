@@ -1,5 +1,7 @@
 import useAxiosSecure from "../../../hooks/useAxiosPublic/useAxiosSecure"
 import {useQuery} from '@tanstack/react-query';
+import Spinner from "../../../components/shared/Spinner";
+
 const Products = () => {
   const axiosSecure = useAxiosSecure();
 
@@ -8,10 +10,14 @@ const Products = () => {
     return res.data;
   }
 
-  const {data: products=[]} = useQuery({
+  const {data: products=[], isLoading} = useQuery({
     queryKey:['products'],
     queryFn: fetchProducts,
   })
+
+  if(isLoading){
+    return <Spinner></Spinner>
+  }
 
   return (
     <div>
@@ -34,7 +40,7 @@ const Products = () => {
           <option value="cleaning_hygiene">🧹 Cleaning & Hygiene</option>
         </select>
       </div>
-      
+      {products.length}
     </div>
   )
 }
