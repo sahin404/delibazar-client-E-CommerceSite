@@ -1,4 +1,18 @@
+import useAxiosSecure from "../../../hooks/useAxiosPublic/useAxiosSecure"
+import {useQuery} from '@tanstack/react-query';
 const Products = () => {
+  const axiosSecure = useAxiosSecure();
+
+  const fetchProducts = async() =>{
+    const res = await axiosSecure.get('/products');
+    return res.data;
+  }
+
+  const {data: products=[]} = useQuery({
+    queryKey:['products'],
+    queryFn: fetchProducts,
+  })
+
   return (
     <div>
       <h1 className="text-red-500 font-semibold text-3xl text-center">All Products List</h1>
