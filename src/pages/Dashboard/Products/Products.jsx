@@ -1,19 +1,27 @@
 import useAxiosSecure from "../../../hooks/useAxiosPublic/useAxiosSecure"
 import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../../components/shared/Spinner";
+import { useState } from "react";
 
 const Products = () => {
   const axiosSecure = useAxiosSecure();
+  const [page, setPage] = useState(1);
 
-  const fetchProducts = async () => {
-    const res = await axiosSecure.get('/products');
+  const fetchProducts = async ({queryKey}) => {
+    const [,page] = queryKey;
+    const limit = 10;
+    const res = await axiosSecure.get('/products',{
+      params: {page, limit}
+    });
     return res.data;
   }
 
-  const { data: products = [], isLoading } = useQuery({
-    queryKey: ['products'],
+  const { data:{result:products=[], total=0} = {}, isLoading } = useQuery({
+    queryKey: ['products', page],
     queryFn: fetchProducts,
   })
+
+  const totalPage = Math.ceil(total/10);
 
   if (isLoading) {
     return <Spinner></Spinner>
