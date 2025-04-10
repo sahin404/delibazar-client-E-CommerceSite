@@ -75,7 +75,7 @@ const Products = () => {
           <tbody>
             {products.map((product, index) => (
               <tr key={product._id} className="border-b">
-                <td className="px-4 py-2">{index + 1}</td>
+                <td className="px-4 py-2">{ (page-1)*10 + index + 1}</td>
                 <td className="px-4 py-2">
                   <img
                     src={product.picture || 'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg?w=360'} // Use a default image if none exists
