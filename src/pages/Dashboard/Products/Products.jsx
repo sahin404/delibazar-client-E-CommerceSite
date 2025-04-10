@@ -2,6 +2,7 @@ import useAxiosSecure from "../../../hooks/useAxiosPublic/useAxiosSecure"
 import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../../components/shared/Spinner";
 import { useState } from "react";
+import ProductPaginationControl from "./ProductPaginationControl";
 
 const Products = () => {
   const axiosSecure = useAxiosSecure();
@@ -19,6 +20,7 @@ const Products = () => {
   const { data:{result:products=[], total=0} = {}, isLoading } = useQuery({
     queryKey: ['products', page],
     queryFn: fetchProducts,
+    keepPreviousData:true
   })
 
   const totalPage = Math.ceil(total/10);
@@ -95,7 +97,13 @@ const Products = () => {
             ))}
           </tbody>
         </table>
-
+        
+        {/* Pagination */}
+        <ProductPaginationControl 
+        page={page}
+        setPage={setPage}
+        totalPage={totalPage}
+        ></ProductPaginationControl>
       </div>
     </div>
   )
