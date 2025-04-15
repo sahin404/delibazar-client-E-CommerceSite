@@ -1,6 +1,7 @@
 import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react"
 import { auth } from "../firebase/firebase.config";
+import useAxiosSecure from "../hooks/useAxiosPublic/useAxiosSecure";
 
 export const AuthContext = createContext(null);
 
@@ -8,6 +9,7 @@ export const AuthContext = createContext(null);
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
+  const axiosSecure = useAxiosSecure();
 
 
   const signUp = (email, password) => {
@@ -36,6 +38,17 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setLoading(false);
         // console.log(currentUser);
+        axiosSecure.post('/users',{
+          name: currentUser.displayName,
+          email: currentUser.email,
+          date: currentUser.metadata.creationTime
+        })
+        .then(()=>{
+          // console.log('success',res);
+        })
+        .catch(()=>{
+          console.log('error occured');
+        })
       }
       
     })

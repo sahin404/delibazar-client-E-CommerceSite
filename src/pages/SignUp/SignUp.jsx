@@ -7,8 +7,10 @@ import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { signUp, logOut, updatePro } = useContext(AuthContext);
+
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  
   const validate = values => {
     const errors = {};
     if (!values.name) {
@@ -32,7 +34,9 @@ const SignUp = () => {
       errors.password = 'Your Password Must Contain At Least One Letter.';
     }
 
+
     return errors;
+    
   };
 
   const formik = useFormik({
@@ -56,6 +60,8 @@ const SignUp = () => {
             showConfirmButton: false,
             timer: 1000
           });
+
+
         })
         .catch(() => {
           setError("An Error Occured. Please Try Again!");
