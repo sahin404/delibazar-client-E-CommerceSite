@@ -44,7 +44,7 @@ const AuthProvider = ({ children }) => {
           date: currentUser.metadata.creationTime
         })
         .then(()=>{
-          // console.log('success',res);
+          
         })
         .catch(()=>{
           console.log('error occured');
