@@ -48,7 +48,7 @@ const Users = () => {
               <tr key={user._id} className="border-b">
                 <td className="px-4 py-2">{(page - 1) * 10 + index + 1}</td>
                 <td className="px-4 py-2">{user.name}</td>
-                <td className="px-4 py-2">{user.email} BDT</td>
+                <td className="px-4 py-2">{user.email}</td>
                 <td className="px-4 py-2">{user.date}</td>
                 <td className="px-4 py-2 flex gap-2">
                   <button className="bg-blue-500 text-white px-4 py-1 rounded">

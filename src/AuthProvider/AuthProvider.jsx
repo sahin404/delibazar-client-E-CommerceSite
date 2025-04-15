@@ -24,9 +24,9 @@ const AuthProvider = ({ children }) => {
   }
   const updatePro = (name) => {
     return updateProfile(auth.currentUser, {
-        displayName: name,
+      displayName: name,
     })
-}
+  }
 
   const logOut = () => {
     return signOut(auth);
@@ -38,27 +38,18 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setLoading(false);
         // console.log(currentUser);
-        axiosSecure.post('/users',{
-          name: currentUser.displayName,
-          email: currentUser.email,
-          date: currentUser.metadata.creationTime
-        })
-        .then(()=>{
-          
-        })
-        .catch(()=>{
-          console.log('error occured');
-        })
       }
-      
+
     })
     return () => {
       return unSubscribe();
     }
-  }, [])
+  }, [axiosSecure])
+
+
 
   const info = {
-    user, loading, signUp, signIn, logOut,updatePro
+    user, loading, signUp, signIn, logOut, updatePro
   }
   return (
     <AuthContext.Provider value={info}>

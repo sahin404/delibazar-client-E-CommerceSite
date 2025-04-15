@@ -4,13 +4,14 @@ import { IoArrowBackCircleOutline } from "react-icons/io5";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../hooks/useAxiosPublic/useAxiosSecure";
 
 const SignUp = () => {
   const { signUp, logOut, updatePro } = useContext(AuthContext);
-
+  const axiosSecure = useAxiosSecure();
   const [error, setError] = useState("");
   const navigate = useNavigate();
-  
+
   const validate = values => {
     const errors = {};
     if (!values.name) {
@@ -36,7 +37,7 @@ const SignUp = () => {
 
 
     return errors;
-    
+
   };
 
   const formik = useFormik({
@@ -49,9 +50,20 @@ const SignUp = () => {
     onSubmit: values => {
       setError("");
       signUp(values.email, values.password)
-        .then(() => {
-          updatePro(values.name);
-          logOut();
+        .then(async (res) => {
+          await updatePro(values.name)
+          await axiosSecure.post('/users', {
+            name: values.name,
+            email: res.user.email,
+            date: res.user.metadata.creationTime
+          })
+            .then(() => {
+
+            })
+            .catch(() => {
+              console.log('error occured');
+            })
+          await logOut();
           navigate('/login');
           Swal.fire({
             position: "center",
