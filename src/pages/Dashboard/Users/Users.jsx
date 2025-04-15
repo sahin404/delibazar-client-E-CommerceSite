@@ -1,18 +1,29 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosPublic/useAxiosSecure"
 import Spinner from "../../../components/shared/Spinner";
+import { useState } from "react";
+import ProductPaginationControl from "../Products/ProductPaginationControl";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
-  const fetchingData = async () => {
-    const res = await axiosSecure.get('/users')
+  const [page,setPage] = useState(1);
+  
+  const fetchingData = async ({queryKey}) => {
+    const page = queryKey;
+    const limit = 10;
+    const res = await axiosSecure.get('/dbusers',{
+      params:{page, limit}
+    } );
     return res.data;
   }
 
-  const { data: users = [], isLoading } = useQuery({
-    queryKey: ['users'],
-    queryFn: fetchingData
+  const { data:{result:users=[], total = 0}={}, isLoading } = useQuery({
+    queryKey: ['users', page],
+    queryFn: fetchingData,
+    keepPreviousData: true
   })
+
+  const totalPage = Math.ceil(total/10);
 
   if (isLoading) {
     return <Spinner></Spinner>
@@ -35,7 +46,7 @@ const Users = () => {
           <tbody>
             {users.map((user, index) => (
               <tr key={user._id} className="border-b">
-                <td className="px-4 py-2">{index + 1}</td>
+                <td className="px-4 py-2">{(page - 1) * 10 + index + 1}</td>
                 <td className="px-4 py-2">{user.name}</td>
                 <td className="px-4 py-2">{user.email} BDT</td>
                 <td className="px-4 py-2">{user.date}</td>
@@ -52,6 +63,11 @@ const Users = () => {
           </tbody>
         </table>
 
+            <ProductPaginationControl
+             page={page}
+             setPage={setPage}
+             totalPage={totalPage}
+            ></ProductPaginationControl>
 
       </div>
     </div>

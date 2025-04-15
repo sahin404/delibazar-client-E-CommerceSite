@@ -8,6 +8,8 @@ const Products = () => {
   const axiosSecure = useAxiosSecure();
   const [page, setPage] = useState(1);
 
+  
+
   const fetchProducts = async ({queryKey}) => {
     const [,page] = queryKey;
     const limit = 10;
