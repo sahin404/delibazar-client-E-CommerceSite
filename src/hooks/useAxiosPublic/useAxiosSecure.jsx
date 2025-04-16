@@ -1,12 +1,31 @@
 import axios from "axios"
 
 const axiosSecure = axios.create({
-    baseURL:'http://localhost:5000'
+  baseURL: 'http://localhost:5000'
 })
 
 const useAxiosSecure = () => {
+
+  // request
+  axiosSecure.interceptors.request.use(
+    function (config) {
+      const token = localStorage.getItem('access-token');
+      config.headers.authorixation = `bearer ${token}`;
+      return config;
+    },
+    function (error) {
+      // Do something with request error
+      return Promise.reject(error);
+    }
+  )
+
+  // response
+
+
+
+
   return axiosSecure;
-  
+
 }
 
 export default useAxiosSecure
