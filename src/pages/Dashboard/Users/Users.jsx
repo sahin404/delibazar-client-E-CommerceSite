@@ -3,27 +3,58 @@ import useAxiosSecure from "../../../hooks/useAxiosPublic/useAxiosSecure"
 import Spinner from "../../../components/shared/Spinner";
 import { useState } from "react";
 import ProductPaginationControl from "../Products/ProductPaginationControl";
+import Swal from "sweetalert2";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
-  const [page,setPage] = useState(1);
-  
-  const fetchingData = async ({queryKey}) => {
+  const [page, setPage] = useState(1);
+
+  const fetchingData = async ({ queryKey }) => {
     const page = queryKey;
     const limit = 10;
-    const res = await axiosSecure.get('/dbusers',{
-      params:{page, limit}
-    } );
+    const res = await axiosSecure.get('/dbusers', {
+      params: { page, limit }
+    });
     return res.data;
   }
 
-  const { data:{result:users=[], total = 0}={}, isLoading } = useQuery({
+  const { data: { result: users = [], total = 0 } = {}, isLoading, refetch } = useQuery({
     queryKey: ['users', page],
     queryFn: fetchingData,
     keepPreviousData: true
   })
 
-  const totalPage = Math.ceil(total/10);
+  const totalPage = Math.ceil(total / 10);
+
+  const handleDelete = id => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.delete(`/user/${id}`)
+          .then(res => {
+            if (res.status === 200) {
+              Swal.fire({
+                title: "Deleted!",
+                text: "This Account has been deleted.",
+                icon: "success"
+              });
+              refetch();
+            }
+          })
+      }
+    });
+  }
+
+  const handleMakeAdmin = id =>{
+    console.log(id);
+  }
 
   if (isLoading) {
     return <Spinner></Spinner>
@@ -51,10 +82,10 @@ const Users = () => {
                 <td className="px-4 py-2">{user.email}</td>
                 <td className="px-4 py-2">{user.date}</td>
                 <td className="px-4 py-2 flex gap-2">
-                  <button className="bg-blue-500 text-white px-4 py-1 rounded">
+                  <button onClick={()=>handleMakeAdmin(user._id)} className="bg-blue-500 text-white px-4 py-1 rounded">
                     Make Admin
                   </button>
-                  <button className="bg-red-500 text-white px-4 py-1 rounded">
+                  <button onClick={() => handleDelete(user._id)} className="bg-red-500 text-white px-4 py-1 rounded">
                     Delete
                   </button>
                 </td>
@@ -63,11 +94,11 @@ const Users = () => {
           </tbody>
         </table>
 
-            <ProductPaginationControl
-             page={page}
-             setPage={setPage}
-             totalPage={totalPage}
-            ></ProductPaginationControl>
+        <ProductPaginationControl
+          page={page}
+          setPage={setPage}
+          totalPage={totalPage}
+        ></ProductPaginationControl>
 
       </div>
     </div>
