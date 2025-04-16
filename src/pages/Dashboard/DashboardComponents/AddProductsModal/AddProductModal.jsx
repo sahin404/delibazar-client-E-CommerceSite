@@ -1,10 +1,48 @@
+import Swal from "sweetalert2";
+import useAxiosSecure from "../../../../hooks/useAxiosPublic/useAxiosSecure";
+
 const AddProductModal = ({ isModalOpen, setIsModalOpen }) => {
+    const axiosSecure = useAxiosSecure();
     if (!isModalOpen) {
         return null;
     }
-
-    const handleSubmit = e =>{
+    
+    const handleSubmit = e => {
         e.preventDefault();
+        const form = e.target;
+        const newProduct = {
+            picture: form.image.value,
+            name: form.name.value,
+            category: form.category.value,
+            price: parseFloat(form.price.value),
+            stock_status: form.stockStatus.value,
+            description: form.description.value,
+           
+        };
+        
+        axiosSecure.post('/addProduct',newProduct)
+        .then(res=>{
+            if(res.status === 200){
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Product Added!',
+                    text: 'Your product has been added successfully.',
+                    showConfirmButton: false,
+                    timer: 1500,
+                    timerProgressBar: true,
+                  })
+                  .then(()=>{
+                    form.reset();
+                  })
+                
+            }
+        })
+        .catch(()=>{
+            console.log('err occured in add product api');
+        })
+        
+
+        
     }
     return (
         <div>
@@ -53,7 +91,7 @@ const AddProductModal = ({ isModalOpen, setIsModalOpen }) => {
                                     <option value="out_of_stock">Out of Stock</option>
                                 </select>
 
-                                <input type="number" name="price" placeholder="Price (BDT)" required className="w-full p-2 border rounded border-gray-300  shawow-sm focus:ring-2 focus:ring-[#D1A054] focus:border-[#D1A054] outline-none" />
+                                <input autoComplete="off" type="number" name="price" placeholder="Price (BDT)" required className="w-full p-2 border rounded border-gray-300  shawow-sm focus:ring-2 focus:ring-[#D1A054] focus:border-[#D1A054] outline-none" />
 
                                 <textarea name="description" placeholder="Description" rows="3" required className="w-full p-2 border rounded border-gray-300  shawow-sm focus:ring-2 focus:ring-[#D1A054] focus:border-[#D1A054] outline-none"></textarea>
 
