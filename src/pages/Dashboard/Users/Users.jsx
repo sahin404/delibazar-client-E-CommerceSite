@@ -79,7 +79,30 @@ const Users = () => {
   }
 
   const handleDeleteMakeAdmin = id => {
-
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to remove admin access from this user. Do you want to continue?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#d33",
+      cancelButtonColor: "#3085d6",
+      confirmButtonText: "Yes, remove admin!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/userRemoveAdmin/${id}`)
+          .then(res => {
+            if (res.status === 200) {
+              Swal.fire({
+                title: "Updated!",
+                text: "Admin privileges have been removed from this user.",
+                icon: "success"
+              });
+              refetch();
+            }
+          })
+      }
+    });
+    
   }
 
   if (isLoading) {
