@@ -53,7 +53,30 @@ const Users = () => {
   }
 
   const handleMakeAdmin = id =>{
-    console.log(id);
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You are about to promote this user to an admin. Do you want to continue?",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, make admin!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecure.patch(`/userMakeAdmin/${id}`)
+        .then(res=>{
+          if (res.status === 200) {
+            Swal.fire({
+              title: "Updated!",
+              text: "This user has been granted admin privileges.",
+              icon: "success"
+            });
+            refetch();
+          }
+        })
+      }
+    });
+   
   }
 
   if (isLoading) {
