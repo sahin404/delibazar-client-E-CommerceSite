@@ -158,6 +158,7 @@ const Products = () => {
           isUpdateModalOpen={isUpdateModalOpen}
           setIsUpdateModalOpen={setIsUpdateModalOpen}
           productToUpdate={productToUpdate}
+          refetch={refetch}
         ></UpdateProductModal>
 
       </div>
