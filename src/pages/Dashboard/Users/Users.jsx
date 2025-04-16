@@ -52,7 +52,7 @@ const Users = () => {
     });
   }
 
-  const handleMakeAdmin = id =>{
+  const handleMakeAdmin = id => {
     Swal.fire({
       title: "Are you sure?",
       text: "You are about to promote this user to an admin. Do you want to continue?",
@@ -64,19 +64,22 @@ const Users = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axiosSecure.patch(`/userMakeAdmin/${id}`)
-        .then(res=>{
-          if (res.status === 200) {
-            Swal.fire({
-              title: "Updated!",
-              text: "This user has been granted admin privileges.",
-              icon: "success"
-            });
-            refetch();
-          }
-        })
+          .then(res => {
+            if (res.status === 200) {
+              Swal.fire({
+                title: "Updated!",
+                text: "This user has been granted admin privileges.",
+                icon: "success"
+              });
+              refetch();
+            }
+          })
       }
     });
-   
+  }
+
+  const handleDeleteMakeAdmin = id => {
+
   }
 
   if (isLoading) {
@@ -105,10 +108,15 @@ const Users = () => {
                 <td className="px-4 py-2">{user.email}</td>
                 <td className="px-4 py-2">{user.date}</td>
                 <td className="px-4 py-2 flex gap-2">
-                  <button onClick={()=>handleMakeAdmin(user._id)} className="bg-blue-500 text-white px-4 py-1 rounded">
-                    Make Admin
-                  </button>
-                  <button onClick={() => handleDelete(user._id)} className="bg-red-500 text-white px-4 py-1 rounded">
+                  {
+                    user?.role === 'admin' ? <button onClick={() => handleDeleteMakeAdmin(user._id)} className="w-32 h-16 bg-orange-500 text-white px-4 py-1 rounded">
+                      Remove Admin
+                    </button> : <button onClick={() => handleMakeAdmin(user._id)} className="h-16 w-32 bg-blue-500 text-white px-4 py-1 rounded">
+                      Make Admin
+                    </button>
+                  }
+
+                  <button onClick={() => handleDelete(user._id)} className="w-32 h-16 bg-red-500 text-white px-4 py-1 rounded">
                     Delete
                   </button>
                 </td>
