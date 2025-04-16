@@ -5,6 +5,7 @@ const axiosSecure = axios.create({
 })
 
 const useAxiosSecure = () => {
+  
 
   // request
   axiosSecure.interceptors.request.use(
@@ -20,7 +21,6 @@ const useAxiosSecure = () => {
   )
 
   // response
-
 
 
 
