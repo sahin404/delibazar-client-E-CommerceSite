@@ -4,29 +4,47 @@ import Spinner from "../../../components/shared/Spinner";
 import { useState } from "react";
 import ProductPaginationControl from "./ProductPaginationControl";
 import AddProductModal from "../DashboardComponents/AddProductsModal/AddProductModal";
+import Swal from "sweetalert2";
 
 const Products = () => {
   const axiosSecure = useAxiosSecure();
   const [page, setPage] = useState(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  
-  const fetchProducts = async ({queryKey}) => {
-    const [,page] = queryKey;
+
+  const fetchProducts = async ({ queryKey }) => {
+    const [, page] = queryKey;
     const limit = 10;
-    const res = await axiosSecure.get('/products',{
-      params: {page, limit}
+    const res = await axiosSecure.get('/products', {
+      params: { page, limit }
     });
     return res.data;
   }
 
-  const { data:{result:products=[], total=0} = {}, isLoading } = useQuery({
+  const { data: { result: products = [], total = 0 } = {}, isLoading, refetch } = useQuery({
     queryKey: ['products', page],
     queryFn: fetchProducts,
-    keepPreviousData:true
+    keepPreviousData: true
   })
 
-  const totalPage = Math.ceil(total/10);
+  const handleDelete = id => {
+    axiosSecure.delete(`/productDelete/${id}`)
+      .then(res => {
+        if (res.data.deletedCount > 0) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Product Deleted!',
+            text: 'Your product has been deleted successfully.',
+            showConfirmButton: false,
+            timer: 1500,
+            timerProgressBar: true,
+          })
+          refetch();
+        }
+      })
+  }
+
+  const totalPage = Math.ceil(total / 10);
 
   if (isLoading) {
     return <Spinner></Spinner>
@@ -55,7 +73,7 @@ const Products = () => {
           </select>
         </div>
         <div>
-          <button onClick={()=>setIsModalOpen(true)} className="bg-blue-500 text-white px-4 py-3 rounded">
+          <button onClick={() => setIsModalOpen(true)} className="bg-blue-500 text-white px-4 py-3 rounded">
             + Add Product
           </button>
         </div>
@@ -78,7 +96,7 @@ const Products = () => {
           <tbody>
             {products.map((product, index) => (
               <tr key={product._id} className="border-b">
-                <td className="px-4 py-2">{ (page-1)*10 + index + 1}</td>
+                <td className="px-4 py-2">{(page - 1) * 10 + index + 1}</td>
                 <td className="px-4 py-2">
                   <img
                     src={product.picture || 'https://img.freepik.com/premium-vector/default-image-icon-vector-missing-picture-page-website-design-mobile-app-no-photo-available_87543-11093.jpg?w=360'} // Use a default image if none exists
@@ -92,7 +110,7 @@ const Products = () => {
                   <button className="bg-blue-500 text-white px-4 py-1 rounded">
                     Update
                   </button>
-                  <button className="bg-red-500 text-white px-4 py-1 rounded">
+                  <button onClick={() => handleDelete(product._id)} className="bg-red-500 text-white px-4 py-1 rounded">
                     Delete
                   </button>
                 </td>
@@ -100,16 +118,16 @@ const Products = () => {
             ))}
           </tbody>
         </table>
-        
+
         {/* Pagination */}
-        <ProductPaginationControl 
-        page={page}
-        setPage={setPage}
-        totalPage={totalPage}
+        <ProductPaginationControl
+          page={page}
+          setPage={setPage}
+          totalPage={totalPage}
         ></ProductPaginationControl>
 
         {/* Add Product Modal */}
-        <AddProductModal isModalOpen = {isModalOpen} setIsModalOpen = {setIsModalOpen} ></AddProductModal>
+        <AddProductModal isModalOpen={isModalOpen} setIsModalOpen={setIsModalOpen} ></AddProductModal>
 
       </div>
     </div>
