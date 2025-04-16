@@ -55,6 +55,13 @@ const Products = () => {
 
   }
 
+  const handleUpdate = id=>{
+    axiosSecure.get(`/update/${id}`)
+    .then(res=>{
+      console.log(res);
+    })
+  }
+
   const totalPage = Math.ceil(total / 10);
 
   if (isLoading) {
@@ -118,7 +125,7 @@ const Products = () => {
                 <td className="px-4 py-2">{product.name}</td>
                 <td className="px-4 py-2">{product.price} BDT</td>
                 <td className="px-4 py-2 flex gap-2">
-                  <button className="bg-blue-500 text-white px-4 py-1 rounded">
+                  <button onClick={()=>handleUpdate(product._id)} className="bg-blue-500 text-white px-4 py-1 rounded">
                     Update
                   </button>
                   <button onClick={() => handleDelete(product._id)} className="bg-red-500 text-white px-4 py-1 rounded">
