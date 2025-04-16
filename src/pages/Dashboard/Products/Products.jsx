@@ -3,13 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import Spinner from "../../../components/shared/Spinner";
 import { useState } from "react";
 import ProductPaginationControl from "./ProductPaginationControl";
+import AddProductModal from "../DashboardComponents/AddProductsModal/AddProductModal";
 
 const Products = () => {
   const axiosSecure = useAxiosSecure();
   const [page, setPage] = useState(1);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   
-
   const fetchProducts = async ({queryKey}) => {
     const [,page] = queryKey;
     const limit = 10;
@@ -54,7 +55,7 @@ const Products = () => {
           </select>
         </div>
         <div>
-          <button className="bg-blue-500 text-white px-4 py-3 rounded">
+          <button onClick={()=>setIsModalOpen(true)} className="bg-blue-500 text-white px-4 py-3 rounded">
             + Add Product
           </button>
         </div>
@@ -106,6 +107,10 @@ const Products = () => {
         setPage={setPage}
         totalPage={totalPage}
         ></ProductPaginationControl>
+
+        {/* Add Product Modal */}
+        <AddProductModal isModalOpen = {isModalOpen} setIsModalOpen = {setIsModalOpen} ></AddProductModal>
+
       </div>
     </div>
   )
