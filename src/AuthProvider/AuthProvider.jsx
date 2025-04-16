@@ -2,7 +2,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { createContext, useEffect, useState } from "react"
 import { auth } from "../firebase/firebase.config";
 import useAxiosSecure from "../hooks/useAxiosPublic/useAxiosSecure";
-
+import useAxiosPublic from "../hooks/useAxiosPublic/useAxiosPublic";
 export const AuthContext = createContext(null);
 
 
@@ -10,6 +10,7 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState([]);
   const [loading, setLoading] = useState(true);
   const axiosSecure = useAxiosSecure();
+  const axiosPublic = useAxiosPublic();
 
 
   const signUp = (email, password) => {
@@ -38,6 +39,17 @@ const AuthProvider = ({ children }) => {
       if (currentUser) {
         setLoading(false);
         // console.log(currentUser);
+        const user = {email:currentUser.email}
+        axiosPublic.post('/jwt',user)
+        .then(res=>{
+          if(res.data.token){
+            localStorage.setItem('access-token', res.data.token);
+          }
+         
+        })
+      }
+      else{
+        localStorage.removeItem('access-token');
       }
 
     })
