@@ -14,17 +14,19 @@ const Products = () => {
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [productToUpdate, setProductToUpdate] = useState([]);
   const { loading } = useContext(AuthContext);
+  const [filtered, setFiltered] = useState('all');
+
   const fetchProducts = async ({ queryKey }) => {
     const [, page] = queryKey;
     const limit = 10;
     const res = await axiosSecure.get('/products', {
-      params: { page, limit }
+      params: { category:filtered, page, limit }
     });
     return res.data;
   }
 
   const { data: { result: products = [], total = 0 } = {}, isLoading, refetch } = useQuery({
-    queryKey: ['products', page],
+    queryKey: ['products', page, filtered],
     queryFn: fetchProducts,
     keepPreviousData: true
   })
@@ -81,7 +83,7 @@ const Products = () => {
       <div className="flex justify-between items-center">
         <div>
           <label className="" htmlFor="">Filtered By:</label>
-          <select className="ml-2 w-52 p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-[#D1A054]">
+          <select value={filtered} onChange={(e)=>setFiltered(e.target.value)} className="ml-2 w-52 p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-[#D1A054]">
             <option value="all">All Products</option>
             <option value="popular">🎩 Popular</option>
             <option value="grocery">🛒 Grocery</option>
@@ -101,6 +103,9 @@ const Products = () => {
             + Add Product
           </button>
         </div>
+      </div>
+      <div className="mt-3 text-[#D1A054]">
+        Number of Products: {products.length}
       </div>
 
 
