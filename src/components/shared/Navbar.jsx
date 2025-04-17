@@ -7,6 +7,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import { DrawerContext } from "../../cartDrawerProvider/CartDrawerProvider";
 import useCarts from "../../hooks/useCarts/useCarts";
 import useAxiosPublic from "../../hooks/useAxiosPublic/useAxiosPublic";
+import useAdmin from "../../hooks/useAdmin/useAdmin";
 
 const Navbar = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -15,12 +16,13 @@ const Navbar = () => {
   const searchRef = useRef(null);
   const navigate = useNavigate();
   const axiosPublic = useAxiosPublic();
-  const { user, logOut} = useContext(AuthContext);
+  const { user, logOut } = useContext(AuthContext);
   const { openDrawer } = useContext(DrawerContext);
   const [carts, refetch] = useCarts();
   const menuRef = useRef(null);
+  const [isAdmin] = useAdmin();
 
-  
+
   // Close dropdown when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -76,7 +78,7 @@ const Navbar = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, []);
 
- 
+
   // Navigate to product details
   const handleProductClick = (id) => {
     navigate(`/product/${id}`);
@@ -85,7 +87,7 @@ const Navbar = () => {
   };
 
   return (
-    
+
     <div className="flex items-center justify-between gap-5 mx-3 md:mx-0">
       {/* Left */}
       <div>
@@ -167,13 +169,30 @@ const Navbar = () => {
           )}
 
           {isOpen && user && (
-            <div className="absolute right-0 mt-2 w-40 bg-white shadow-lg rounded-lg">
-              <button
-                onClick={openDrawer}
-                className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
-              >
-                🛒 My Cart
-              </button>
+            <div className="z-10 absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg">
+              {
+                isAdmin || <button
+                  onClick={openDrawer}
+                  className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  🛒 My Cart
+                </button>
+              }
+              {
+                isAdmin && <Link to="/dashboard">
+                  <button
+                    className="block px-4 py-2 text-gray-700 hover:bg-gray-100"
+                  >
+                    <div className="flex items-center gap-2">
+                      <FaRegUser className="text-md" />
+                      <h1>Admin Dashboard</h1>
+                    </div>
+
+
+                  </button>
+                </Link>
+              }
+
               <button
                 onClick={logOut}
                 className="block w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
