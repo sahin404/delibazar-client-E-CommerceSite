@@ -31,30 +31,30 @@ const Footer = () => {
             {/* right side */}
             <div className="flex flex-col mt-10 md:mt-0 md:flex-row justify-between gap-10 flex-1">
               <div>
-                <p className="font-medium text-gray-900 dark:text-white ">সেবা</p>
+                <p className="font-medium text-white">সেবা</p>
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       একক পরামর্শ
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       পণ্য পর্যালোচনা
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       অর্ডার সংক্রান্ত সহায়তা
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       গ্রাহক সহায়তা
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       ডেলিভারি ও রিটার্ন
                     </Link>
                   </li>
@@ -62,20 +62,20 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-gray-900 dark:text-white">প্রতিষ্ঠান</p>
+                <p className="font-medium text-white">প্রতিষ্ঠান</p>
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       সম্পর্কে জানুন
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       আমাদের টিম
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       গ্রাহক অভিজ্ঞতা
                     </Link>
                   </li>
@@ -83,20 +83,20 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-gray-900 dark:text-white">সহায়ক লিঙ্ক</p>
+                <p className="font-medium text-white">সহায়ক লিঙ্ক</p>
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       যোগাযোগ করুন
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       সাধারণ প্রশ্নসমূহ
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       লাইভ চ্যাট
                     </Link>
                   </li>
@@ -104,25 +104,25 @@ const Footer = () => {
               </div>
 
               <div>
-                <p className="font-medium text-gray-900 dark:text-white">আইনগত</p>
+                <p className="font-medium text-white">আইনগত</p>
                 <ul className="mt-6 space-y-4 text-sm">
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       প্রবেশগম্যতা নীতি
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       রিটার্ন নীতি
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       ফেরত নীতি
                     </Link>
                   </li>
                   <li>
-                    <Link to="#" className="text-gray-700 transition hover:opacity-75 dark:text-gray-200">
+                    <Link to="#" className="text-white transition hover:opacity-75">
                       চাকরির সুযোগ
                     </Link>
                   </li>
@@ -130,9 +130,10 @@ const Footer = () => {
               </div>
             </div>
 
+
           </div>
 
-          <p className="text-xs text-center md:text-left text-gray-500 dark:text-gray-400">
+          <p className="text-xs text-center md:text-left text-white/40">
             &copy; 2025. DeliBazar. All rights reserved.
           </p>
         </div>
