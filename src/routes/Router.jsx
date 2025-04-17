@@ -7,6 +7,7 @@ import SignUp from "../pages/SignUp/SignUp";
 import Dashboard from "../layout/Dashboard";
 import Users from "../pages/Dashboard/Users/Users";
 import Products from "../pages/Dashboard/Products/Products";
+import AdminRoutes from "./AdminRoutes";
 
 
 const router = createBrowserRouter([
@@ -33,7 +34,7 @@ const router = createBrowserRouter([
     },
     {
         path:'/dashboard',
-        element:<Dashboard></Dashboard>,
+        element: <AdminRoutes><Dashboard></Dashboard></AdminRoutes>,
         children:[
             {
                 path:'',
