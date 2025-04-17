@@ -40,9 +40,18 @@ const RightHomeBody = ({ category, filter }) => {
           <Skeleton></Skeleton>
           <Skeleton></Skeleton>
         </div> : <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 px-5 py-3">
-          {products.map((product) => (
-            <ShowProductCard key={product._id} product={product} />
-          ))}
+          {
+            products.length === 0 ?
+              <div className="col-span-full w-2/3 mx-auto mt-5 text-center text-lg text-black">
+                এই ক্যাটেগরির জন্য কোনো পণ্য পাওয়া যাচ্ছে না। দয়া করে পরে আবার চেষ্টা করুন অথবা অন্য কোনো ফিল্টার নির্বাচন করুন।
+              </div>
+              :
+              <div>
+                {products.map((product) => (
+                  <ShowProductCard key={product._id} product={product} />
+                ))}
+              </div>
+          }
         </div>
       }
 
