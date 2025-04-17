@@ -36,9 +36,11 @@ const SignIn = () => {
             signIn(values.email,values.password)
             .then(()=>{
                 // console.log('Successfully Logged In');
+
                 navigate('/');
             })
             .catch(()=>{
+                
                 setError("Invalid Username or Password! Try Again");
             })
         },

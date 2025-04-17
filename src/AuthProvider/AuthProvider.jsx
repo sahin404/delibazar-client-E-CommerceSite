@@ -13,14 +13,17 @@ const AuthProvider = ({ children }) => {
 
 
   const signUp = (email, password) => {
-    setLoading(true);
+    // setLoading(true);
     return createUserWithEmailAndPassword(auth, email, password);
   }
 
   const signIn = (email, password) => {
-    setLoading(true);
-    return signInWithEmailAndPassword(auth, email, password);
-
+    // setLoading(true);
+    return signInWithEmailAndPassword(auth, email, password)
+    .catch(error => {
+      setLoading(false); // Fix: stop the loading if login fails
+      throw error; // pass the error back to the login page
+    });
   }
   const updatePro = (name) => {
     return updateProfile(auth.currentUser, {
@@ -63,7 +66,7 @@ const AuthProvider = ({ children }) => {
     return <LoadingPage></LoadingPage>;
   }
   const info = {
-    user, loading, signUp, signIn, logOut, updatePro
+    user,setLoading, loading, signUp, signIn, logOut, updatePro
   }
   return (
     <AuthContext.Provider value={info}>
