@@ -6,7 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 const useAdmin = () => {
     const { user } = useContext(AuthContext);
     const axiosSecure = useAxiosSecure();
-    const { data: isAdmin } = useQuery({
+    const { data: isAdmin, isLoading: isAdminLoading } = useQuery({
         queryKey: [user?.email, 'isAdmin'],
         enabled: !!user?.email, // Prevents the query from executing if user.email is undefined
         queryFn: async ()=>{
@@ -15,7 +15,7 @@ const useAdmin = () => {
         }
     })
 
-    return [isAdmin];
+    return [isAdmin, isAdminLoading];
 }
 
 export default useAdmin

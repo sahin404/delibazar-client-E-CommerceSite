@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndP
 import { createContext, useEffect, useState } from "react"
 import { auth } from "../firebase/firebase.config";
 import useAxiosPublic from "../hooks/useAxiosPublic/useAxiosPublic";
+import LoadingPage from "../components/nonShared/LoadingPage";
 export const AuthContext = createContext(null);
 
 
@@ -58,12 +59,15 @@ const AuthProvider = ({ children }) => {
     }
   }, [axiosPublic])
 
+  if(loading){
+    return <LoadingPage></LoadingPage>;
+  }
   const info = {
     user, loading, signUp, signIn, logOut, updatePro
   }
   return (
     <AuthContext.Provider value={info}>
-      {children}
+       {children}
     </AuthContext.Provider >
   )
 }

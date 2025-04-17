@@ -1,13 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../hooks/useAxiosPublic/useAxiosSecure"
-import Spinner from "../../../components/shared/Spinner";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ProductPaginationControl from "../Products/ProductPaginationControl";
 import Swal from "sweetalert2";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const Users = () => {
   const axiosSecure = useAxiosSecure();
   const [page, setPage] = useState(1);
+  const {loading} = useContext(AuthContext); 
 
   const fetchingData = async ({ queryKey }) => {
     const page = queryKey;
@@ -105,8 +106,8 @@ const Users = () => {
     
   }
 
-  if (isLoading) {
-    return <Spinner></Spinner>
+  if (isLoading || loading) {
+    return null;
   }
   return (
     <div>

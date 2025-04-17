@@ -1,11 +1,11 @@
 import useAxiosSecure from "../../../hooks/useAxiosPublic/useAxiosSecure"
 import { useQuery } from '@tanstack/react-query';
-import Spinner from "../../../components/shared/Spinner";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import ProductPaginationControl from "./ProductPaginationControl";
 import AddProductModal from "../DashboardComponents/AddProductsModal/AddProductModal";
 import Swal from "sweetalert2";
 import UpdateProductModal from "../DashboardComponents/UpdateProductModal/UpdateProductModal";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 const Products = () => {
   const axiosSecure = useAxiosSecure();
@@ -13,7 +13,7 @@ const Products = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isUpdateModalOpen, setIsUpdateModalOpen] = useState(false);
   const [productToUpdate, setProductToUpdate] = useState([]);
-
+  const { loading } = useContext(AuthContext);
   const fetchProducts = async ({ queryKey }) => {
     const [, page] = queryKey;
     const limit = 10;
@@ -70,8 +70,8 @@ const Products = () => {
 
   const totalPage = Math.ceil(total / 10);
 
-  if (isLoading) {
-    return <Spinner></Spinner>
+  if (isLoading || loading) {
+    return null;
   }
 
   return (
