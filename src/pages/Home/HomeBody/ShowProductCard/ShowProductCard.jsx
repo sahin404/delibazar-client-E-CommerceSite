@@ -51,8 +51,8 @@ const ShowProductCard = ({ product }) => {
                 <p className="text-xs font-semibold text-[#EF4444] md:text-sm">
                     {stock_status === "in_stock" ? "স্টকে আছে" : "স্টকে নাই"}
                 </p>
-                <p>দাম: {price}৳</p>
-            </div>
+                <p>দাম: {price.toLocaleString('bn-BD')} ৳</p>
+            </div> 
             <div className="flex items-center justify-center gap-3 flex-wrap">
                 <Link to={`/product/${_id}`}>
                     <button className="rounded-lg bg-[#233A95] px-4 py-2 text-white duration-300 hover:scale-105">

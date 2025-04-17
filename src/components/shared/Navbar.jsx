@@ -137,7 +137,7 @@ const Navbar = () => {
             <div className="relative w-fit opacity-80 cursor-pointer bg-[#F3F4F7] p-3 rounded-full">
               <FiShoppingCart className="md:text-2xl text-black" />
               <span className="absolute -right-1 -top-2 flex size-5 items-center justify-center rounded-full bg-red-600 text-center text-[10px] text-white">
-                {carts.length}
+                {carts.length.toLocaleString('bn-BD')}
               </span>
             </div>
           </div>
