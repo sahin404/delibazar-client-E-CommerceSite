@@ -24,7 +24,10 @@ const RightHomeBody = ({ category, filter }) => {
         sortedProducts = [...sortedProducts].sort((a, b) => a.price - b.price);
       }
       return sortedProducts;
-    }
+    },
+    staleTime: 5 * 60 * 1000, // Data will be considered fresh for 5 minutes
+    cacheTime: 10 * 60 * 1000, // Cache will be kept for 10 minutes
+    refetchOnWindowFocus: false, // Disable refetch on window focus
   })
 
   return (

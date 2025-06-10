@@ -5,10 +5,25 @@ import Header from "../components/nonShared/Header";
 import Header2 from "../components/nonShared/Header2";
 import Footer from "../components/shared/Footer";
 import MyCartDrawer from "../pages/MyCartDrawer/MyCartDrawer";
+import { useQueryClient } from "@tanstack/react-query";
+import useAxiosPublic from "../hooks/useAxiosPublic/useAxiosPublic";
 
 const Main = () => {
   const location = useLocation();
   const [isNavbarFixed, setIsNavbarFixed] = useState(false);
+  const queryClient = useQueryClient();
+  const axiosPublic = useAxiosPublic();
+
+  useEffect(() => {
+    // Prefetch popular products
+    queryClient.prefetchQuery({
+      queryKey: ["products", "popular"],
+      queryFn: async () => {
+        const res = await axiosPublic.get("/products/popular");
+        return res.data;
+      },
+    });
+  }, [queryClient, axiosPublic]);
 
   useEffect(() => {
     const handleScroll = () => {
