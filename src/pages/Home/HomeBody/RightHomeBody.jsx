@@ -18,15 +18,18 @@ const RightHomeBody = ({ category, filter }) => {
     queryKey: ["products", category, filter, page],
     queryFn: async () => {
       const res = await axiosPublic.get(`/products/${category}?page=${page}&limit=${limit}`);
-      let sortedProducts = res.data.products;
+      // Handle both old and new response formats
+      const products = Array.isArray(res.data) ? res.data : res.data.products || [];
+      const total = res.data.total || products.length;
 
       // Sorting logic based on filter
+      let sortedProducts = [...products];
       if (filter === "মূল্য উচ্চমুখী") {
-        sortedProducts = [...sortedProducts].sort((a, b) => b.price - a.price);
+        sortedProducts = sortedProducts.sort((a, b) => b.price - a.price);
       } else if (filter === "মূল্য নিম্নমুখী") {
-        sortedProducts = [...sortedProducts].sort((a, b) => a.price - b.price);
+        sortedProducts = sortedProducts.sort((a, b) => a.price - b.price);
       }
-      return { products: sortedProducts, total: res.data.total };
+      return { products: sortedProducts, total };
     },
     staleTime: 0, // Always fetch fresh data
     cacheTime: 5 * 60 * 1000, // Cache for 5 minutes
@@ -34,7 +37,7 @@ const RightHomeBody = ({ category, filter }) => {
     keepPreviousData: true, // Keep previous data while loading new data
   });
 
-  const totalPages = Math.ceil(productsData.total / limit);
+  const totalPages = Math.ceil((productsData?.total || 0) / limit);
 
   return (
     <div>
@@ -50,7 +53,7 @@ const RightHomeBody = ({ category, filter }) => {
         </div>
       ) : (
         <div>
-          {productsData.products.length === 0 ? (
+          {(!productsData?.products || productsData.products.length === 0) ? (
             <div className="col-span-full w-2/3 mx-auto mt-5 text-center text-lg text-black">
               এই ক্যাটেগরির জন্য কোনো পণ্য পাওয়া যাচ্ছে না। দয়া করে পরে আবার চেষ্টা করুন অথবা অন্য কোনো ফিল্টার নির্বাচন করুন।
             </div>
