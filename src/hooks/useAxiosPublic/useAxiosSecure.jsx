@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const axiosSecure = axios.create({
-  baseURL: 'https://delibazar-server-e-commerce-site.vercel.app/'
+  baseURL: 'https://delibazar-server.onrender.com'
 })
 
 const useAxiosSecure = () => {
