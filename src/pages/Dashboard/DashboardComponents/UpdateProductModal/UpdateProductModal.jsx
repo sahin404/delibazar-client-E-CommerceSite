@@ -18,7 +18,7 @@ const UpdateProductModal = ({ isUpdateModalOpen, setIsUpdateModalOpen, productTo
             stock_status: form.stockStatus.value,
             description: form.description.value
         };
-        axiosSecure.patch(`/update/${_id}`, newInformation)
+        axiosSecure.put(`/products/${_id}`, newInformation)
             .then(res => {
                 if (res.status === 200) {
                     Swal.fire({

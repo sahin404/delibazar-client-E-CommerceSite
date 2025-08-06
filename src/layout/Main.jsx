@@ -19,7 +19,7 @@ const Main = () => {
     queryClient.prefetchQuery({
       queryKey: ["products", "popular"],
       queryFn: async () => {
-        const res = await axiosPublic.get("/products/popular");
+        const res = await axiosPublic.get("/products/category/popular");
         return res.data;
       },
     });

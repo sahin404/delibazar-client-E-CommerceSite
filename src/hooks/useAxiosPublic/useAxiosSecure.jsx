@@ -1,31 +1,24 @@
 import axios from "axios"
 
 const axiosSecure = axios.create({
-  baseURL: 'https://delibazar-server.onrender.com'
+  baseURL: 'http://localhost:3000/'
 })
 
-const useAxiosSecure = () => {
-  
-
-  // request
-  axiosSecure.interceptors.request.use(
-    function (config) {
-      const token = localStorage.getItem('access-token');
+axiosSecure.interceptors.request.use(
+  function (config) {
+    const token = localStorage.getItem('access-token');
+    if(token){
       config.headers.authorization = `Bearer ${token}`;
-      return config;
-    },
-    function (error) {
-      // Do something with request error
-      return Promise.reject(error);
     }
-  )
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
 
-  // response
-
-
-
+const useAxiosSecure = () => {
   return axiosSecure;
-
 }
 
-export default useAxiosSecure
+export default useAxiosSecure;

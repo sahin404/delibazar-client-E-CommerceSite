@@ -21,7 +21,7 @@ const ShowProductDetails = () => {
 
     useEffect(() => {
         const fetchItems = async () => {
-            const response = await axiosPublic.get(`/product/${id}`);
+            const response = await axiosPublic.get(`/products/${id}`);
             setProduct(response.data);
         };
         fetchItems();

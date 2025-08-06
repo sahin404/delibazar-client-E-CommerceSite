@@ -45,26 +45,25 @@ const Navbar = () => {
 
   // Search function
   useEffect(() => {
-    const fetchSearchResults = async () => {
-      // console.log(searchTerm);
-      if (searchTerm.trim() !== "") {
-        try {
-          const response = await axiosPublic.get(`/search?query=${searchTerm}`);
-          setSearchResults(response.data);
-        } catch (error) {
-          console.error("Search error:", error);
-        }
-      } else {
-        setSearchResults([]);
+  const fetchSearchResults = async () => {
+    if (searchTerm.trim() !== "") {
+      try {
+        const response = await axiosPublic.get(`/search?query=${searchTerm}`);
+        setSearchResults(response.data);  // data সরাসরি array হবে, তাই ঠিক আছে
+      } catch (error) {
+        console.error("Search error:", error);
       }
-    };
+    } else {
+      setSearchResults([]);
+    }
+  };
 
-    const debounceTimeout = setTimeout(() => {
-      fetchSearchResults();
-    }, 300); // Debounce effect for better performance
+  const debounceTimeout = setTimeout(() => {
+    fetchSearchResults();
+  }, 300);
 
-    return () => clearTimeout(debounceTimeout);
-  }, [searchTerm, axiosPublic]);
+  return () => clearTimeout(debounceTimeout);
+}, [searchTerm, axiosPublic]);
 
   // Handle outside click to close search results
   useEffect(() => {

@@ -20,9 +20,9 @@ const AddProductModal = ({ isModalOpen, setIsModalOpen }) => {
            
         };
         
-        axiosSecure.post('/addProduct',newProduct)
+        axiosSecure.post('/products',newProduct)
         .then(res=>{
-            if(res.status === 200){
+            if(res.status === 201){
                 Swal.fire({
                     icon: 'success',
                     title: 'Product Added!',

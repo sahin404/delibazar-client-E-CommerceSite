@@ -25,7 +25,7 @@ const ShowProductCard = ({ product }) => {
     
             try {
                 const res = await axiosSecure.post("/carts", cartInfo);
-                if (res.data.insertedId) {
+                if (res.status===200) {
                     toast.success("Item added to cart!", {
                         position: "top-center",
                         autoClose: 1500, // ✅ ১.৫ সেকেন্ড পর টোষ্ট অটো বন্ধ হবে

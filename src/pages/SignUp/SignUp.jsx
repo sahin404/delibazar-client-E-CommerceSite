@@ -52,7 +52,7 @@ const SignUp = () => {
       signUp(values.email, values.password)
         .then(async (res) => {
           await updatePro(values.name)
-          await axiosSecure.post('/users', {
+          await axiosSecure.post('/auth/users', {
             name: values.name,
             email: res.user.email,
             date: res.user.metadata.creationTime

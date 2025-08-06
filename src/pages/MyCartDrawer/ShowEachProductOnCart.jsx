@@ -10,9 +10,9 @@ const ShowEachProductOnCart = ({ product }) => {
     const [, refetch] = useCarts();
 
     const handleCartDelete = () => {
-        axiosSecure.delete(`/cart/${_id}`)
+        axiosSecure.delete(`/carts/${_id}`)
             .then(res => {
-                if (res.data.deletedCount > 0) {
+                if (res.status===200) {
                     refetch();
                 }
             })
