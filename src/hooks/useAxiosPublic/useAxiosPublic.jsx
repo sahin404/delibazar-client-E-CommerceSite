@@ -1,7 +1,8 @@
 import axios from 'axios'
 
 const axiosPublic = axios.create({
-  baseURL:'https://delibazar-server.onrender.com/'
+  //https://delibazar-server.onrender.com
+  baseURL:'https://delibazar-server.onrender.com'
 })
 
 const useAxiosPublic = () => {

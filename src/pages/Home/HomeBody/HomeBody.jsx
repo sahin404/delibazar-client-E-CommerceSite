@@ -4,7 +4,7 @@ import RightHomeBody from "./RightHomeBody";
 
 const HomeBody = () => {
     const [selected, setSelected] = useState("ডিফল্ট");
-    const [category, setCategory] = useState("");
+    const [category, setCategory] = useState("popular");
 
     const options = [
       "ডিফল্ট",

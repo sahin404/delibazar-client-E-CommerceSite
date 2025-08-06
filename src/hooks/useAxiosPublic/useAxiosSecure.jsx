@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const axiosSecure = axios.create({
-  baseURL: 'https://delibazar-server.onrender.com/'
+  baseURL: 'https://delibazar-server.onrender.com'
 })
 
 axiosSecure.interceptors.request.use(

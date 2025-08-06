@@ -6,10 +6,6 @@ import { useQuery } from "@tanstack/react-query";
 const RightHomeBody = ({ category, filter }) => {
   const axiosPublic = useAxiosPublic();
 
-  if (category === "") {
-    category = "popular";
-  }
-
   const { data: productsData = { products: [] }, isLoading } = useQuery({
     queryKey: ["products", category, filter],
     queryFn: async () => {
