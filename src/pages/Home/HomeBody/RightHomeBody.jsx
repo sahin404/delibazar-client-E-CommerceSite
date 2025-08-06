@@ -34,7 +34,7 @@ const RightHomeBody = ({ category, filter }) => {
       </div>
 
       {isLoading ? (
-        <div className="gap-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+        <div className="gap-20 p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {[...Array(6)].map((_, index) => (
             <div key={index} className="animate-pulse bg-gray-300 h-64 rounded"></div> // Simple skeleton
           ))}
